@@ -1,8 +1,13 @@
 {
   "meta": {
-    "generated_at": "2026-10-02T13:59:42.957719+00:00",
+    "generated_at": "2026-10-02T14:25:19.826909+00:00",
     "go_docs": "https://opencode.ai/docs/go/",
     "sources": {
+      "aa_index": {
+        "label": "AA Intelligence Index",
+        "url": "https://artificialanalysis.ai/models",
+        "canonical": "https://artificialanalysis.ai/models"
+      },
       "aa": {
         "label": "AA Coding Agent Index",
         "url": "https://benchlm.ai/md/benchmarks/aacodingagents.md",
@@ -662,6 +667,33 @@
           "label": "Ministral 3 3B",
           "score": 10.0
         }
+      ],
+      "aa_index": [
+        {
+          "label": "deepseek-v4-flash-vision-exp",
+          "score": null,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "label": "hy4-preview",
+          "score": null,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "label": "longcat-2.5-preview-free",
+          "score": null,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "label": "mimo-v2.5",
+          "score": null,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "label": "space-bunny-free",
+          "score": null,
+          "error": "HTTP Error 404: Not Found"
+        }
       ]
     }
   },
@@ -684,6 +716,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 39.5,
+          "label": "deepseek-v4.1-flash (AA index)"
+        },
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
@@ -710,6 +746,10 @@
       "aa_score": 38.7,
       "aa_label": "Codex - DeepSeek V4 Flash 0731 (max)",
       "scores": {
+        "aa_index": {
+          "score": 34.3,
+          "label": "deepseek-v4-flash (AA index)"
+        },
         "aa": {
           "score": 38.7,
           "label": "Codex - DeepSeek V4 Flash 0731 (max)"
@@ -739,6 +779,7 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": null,
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": null
@@ -762,6 +803,10 @@
       "aa_score": 43.1,
       "aa_label": "Codex - DeepSeek V4 Pro 0813 (max)",
       "scores": {
+        "aa_index": {
+          "score": 36.0,
+          "label": "deepseek-v4-pro (AA index)"
+        },
         "aa": {
           "score": 43.1,
           "label": "Codex - DeepSeek V4 Pro 0813 (max)"
@@ -794,6 +839,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 33.7,
+          "label": "glm-5.2 (AA index)"
+        },
         "aa": null,
         "frontiercode": {
           "score": 24.5,
@@ -823,6 +872,10 @@
       "aa_score": 53.6,
       "aa_label": "Opencode - GLM-5.3 ({'reasoning_effort': 'max'})",
       "scores": {
+        "aa_index": {
+          "score": 44.8,
+          "label": "glm-5.3 (AA index)"
+        },
         "aa": {
           "score": 53.6,
           "label": "Opencode - GLM-5.3 ({'reasoning_effort': 'max'})"
@@ -855,6 +908,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 41.8,
+          "label": "glm-5.3-flash (AA index)"
+        },
         "aa": null,
         "frontiercode": {
           "score": 31.8,
@@ -884,6 +941,10 @@
       "aa_score": 43.2,
       "aa_label": "Codex - GPT-5.6 Luna (max)",
       "scores": {
+        "aa_index": {
+          "score": 37.3,
+          "label": "gpt-5.6-luna (AA index)"
+        },
         "aa": {
           "score": 43.2,
           "label": "Codex - GPT-5.6 Luna (max)"
@@ -916,6 +977,10 @@
       "aa_score": 41.1,
       "aa_label": "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})",
       "scores": {
+        "aa_index": {
+          "score": 38.1,
+          "label": "gpt-6-luna (AA index)"
+        },
         "aa": {
           "score": 41.1,
           "label": "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})"
@@ -948,6 +1013,10 @@
       "aa_score": 47.0,
       "aa_label": "Grok Build - Grok 4.6 (xhigh)",
       "scores": {
+        "aa_index": {
+          "score": 44.3,
+          "label": "grok-4.6 (AA index)"
+        },
         "aa": {
           "score": 47.0,
           "label": "Grok Build - Grok 4.6 (xhigh)"
@@ -980,6 +1049,10 @@
       "aa_score": 56.3,
       "aa_label": "Grok Build - Grok 4.7 (xhigh)",
       "scores": {
+        "aa_index": {
+          "score": 46.4,
+          "label": "grok-4.7 (AA index)"
+        },
         "aa": {
           "score": 56.3,
           "label": "Grok Build - Grok 4.7 (xhigh)"
@@ -1009,6 +1082,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 25.3,
+          "label": "hy3 (AA index)"
+        },
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
@@ -1035,6 +1112,7 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": null,
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
@@ -1061,6 +1139,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 27.0,
+          "label": "kimi-k2.6 (AA index)"
+        },
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
@@ -1087,6 +1169,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 25.8,
+          "label": "kimi-k2.7-code (AA index)"
+        },
         "aa": null,
         "frontiercode": {
           "score": 30.1,
@@ -1116,6 +1202,10 @@
       "aa_score": 51.9,
       "aa_label": "Kimi Code CLI - Kimi K3",
       "scores": {
+        "aa_index": {
+          "score": 43.6,
+          "label": "kimi-k3 (AA index)"
+        },
         "aa": {
           "score": 51.9,
           "label": "Kimi Code CLI - Kimi K3"
@@ -1148,6 +1238,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 19.1,
+          "label": "longcat-2.0 (AA index)"
+        },
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": null
@@ -1166,6 +1260,7 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": null,
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": null
@@ -1189,6 +1284,7 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": null,
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
@@ -1215,6 +1311,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 26.0,
+          "label": "mimo-v2.5-pro (AA index)"
+        },
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
@@ -1241,6 +1341,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 37.9,
+          "label": "mimo-v2.6-flash (AA index)"
+        },
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
@@ -1267,6 +1371,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 46.3,
+          "label": "mimo-v2.6-pro (AA index)"
+        },
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
@@ -1293,6 +1401,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 22.8,
+          "label": "minimax-m2.7 (AA index)"
+        },
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
@@ -1319,6 +1431,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 29.2,
+          "label": "minimax-m3 (AA index)"
+        },
         "aa": null,
         "frontiercode": {
           "score": 14.7,
@@ -1348,6 +1464,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 39.6,
+          "label": "muse-spark-1.2-contributor (AA index)"
+        },
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
@@ -1374,6 +1494,10 @@
       "aa_score": 54.3,
       "aa_label": "Muse Code - Muse Spark 1.3 (max)",
       "scores": {
+        "aa_index": {
+          "score": 48.1,
+          "label": "muse-spark-1.3-contributor (AA index)"
+        },
         "aa": {
           "score": 54.3,
           "label": "Muse Code - Muse Spark 1.3 (max)"
@@ -1403,6 +1527,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 25.2,
+          "label": "qwen3.7-plus (AA index)"
+        },
         "aa": null,
         "frontiercode": {
           "score": 10.2,
@@ -1432,6 +1560,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": {
+          "score": 39.8,
+          "label": "qwen3.8-flash (AA index)"
+        },
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
@@ -1458,6 +1590,10 @@
       "aa_score": 43.3,
       "aa_label": "Claude Code - Qwen3.8 Max",
       "scores": {
+        "aa_index": {
+          "score": 45.4,
+          "label": "qwen3.8-max (AA index)"
+        },
         "aa": {
           "score": 43.3,
           "label": "Claude Code - Qwen3.8 Max"
@@ -1482,6 +1618,7 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
+        "aa_index": null,
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": null

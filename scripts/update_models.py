@@ -28,6 +28,11 @@ from datetime import datetime, timezone
 
 GO_DOCS_URL = "https://opencode.ai/docs/go/"
 SOURCES = {
+    "aa_index": {
+        "label": "AA Intelligence Index",
+        "url": "https://artificialanalysis.ai/models",
+        "canonical": "https://artificialanalysis.ai/models",
+    },
     "aa": {
         "label": "AA Coding Agent Index",
         "url": "https://benchlm.ai/md/benchmarks/aacodingagents.md",
@@ -43,6 +48,20 @@ SOURCES = {
         "url": "https://benchlm.ai/md/coding.md",
         "canonical": "https://benchlm.ai/coding",
     },
+}
+
+# AA model-page slug -> Go model id. AA slugs are usually the Go id with dots
+# as dashes ("qwen3-8-max" vs "qwen3.8-max"), covered by normalization; only
+# true renames go here.
+AA_SLUGS = {
+    "deepseek-v4.1-flash": ["deepseek-v4-1-flash"],
+    "deepseek-v4-flash": ["deepseek-v4-flash"],
+    "deepseek-v4-pro": ["deepseek-v4-pro"],
+    "kimi-k2.6": ["kimi-k2-6"],
+    "muse-spark-1.2-contributor": ["muse-spark-1-2"],
+    "muse-spark-1.3-contributor": ["muse-spark-1-3"],
+    "hy3": ["hy3"],
+    "qwen3.8-flash": ["qwen3-8-flash-next"],  # closest published sibling
 }
 
 UA = {"User-Agent": "opencode-go-pareto-updater/1.0 (+github pages demo)"}
@@ -86,6 +105,38 @@ def parse_leaderboard(md, key):
             continue
         scores[gid] = (score, label)
     return scores, unmatched
+
+
+def fetch_aa_index(go_ids):
+    """Scrape AA Intelligence Index per model page: {go_id: (score, label)}.
+
+    No bulk endpoint exists (only 24 chart-selected models inline on
+    /models), so fetch each mapped model page and read intelligenceIndex.
+    Unmapped Go ids (free/experimental models with no AA page) are skipped
+    and reported. Fails loudly on shape changes or mass misses.
+    """
+    import time
+    scores, missing = {}, []
+    for gid in sorted(go_ids):
+        slug = AA_SLUGS.get(gid, [gid])[0].replace(".", "-")
+        html = None
+        try:
+            html = get(f"https://artificialanalysis.ai/models/{slug}")
+        except Exception as e:  # noqa: BLE001 - reported, not hidden
+            missing.append({"label": gid, "score": None, "error": str(e)})
+        if html is None:
+            continue
+        m = re.search(r'intelligenceIndex\\?":([0-9.]+|null)', html)
+        me = re.search(r'intelligenceIndexIsEstimated\\?":(true|false)', html)
+        if not m or m.group(1) == "null":
+            missing.append({"label": gid, "score": None, "error": "no index"})
+            time.sleep(1)
+            continue
+        scores[gid] = (round(float(m.group(1)), 1),
+                       f"{gid} (AA index"
+                       f"{', estimated' if me and me.group(1) == 'true' else ''})")
+        time.sleep(1)
+    return scores, missing
 
 
 def match_scores(scores_list, go_ids):
@@ -245,9 +296,11 @@ def main(out_path="data/models.json"):
                 return v, k
         return None, None
 
-    # AA scores
+    # BenchLM-mirror score sources
     raw = []
     for key, src in SOURCES.items():
+        if key == "aa_index":
+            continue
         raw.append((key, parse_leaderboard(get(src["url"]), key)[0]))
     go_ids_pre = []
     for key in sorted(go_idx):
@@ -256,6 +309,9 @@ def main(out_path="data/models.json"):
         _, gid = endpoints.get(key, (name, None))
         go_ids_pre.append(gid or norm(name).replace(" ", "-"))
     matched, unmatched = match_scores(raw, go_ids_pre)
+    # AA Intelligence Index: per-model pages (no bulk endpoint)
+    aa_scores, aa_missing = fetch_aa_index(go_ids_pre)
+    matched["aa_index"], unmatched["aa_index"] = aa_scores, aa_missing
     for key, src in SOURCES.items():
         if not matched[key]:
             sys.exit(f"{key}: zero scores matched to Go models")

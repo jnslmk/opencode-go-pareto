@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-10-02T14:25:19.826909+00:00",
+    "generated_at": "2026-10-02T14:38:59.897595+00:00",
     "go_docs": "https://opencode.ai/docs/go/",
     "sources": {
       "aa_index": {
@@ -670,22 +670,12 @@
       ],
       "aa_index": [
         {
-          "label": "deepseek-v4-flash-vision-exp",
-          "score": null,
-          "error": "HTTP Error 404: Not Found"
-        },
-        {
           "label": "hy4-preview",
           "score": null,
           "error": "HTTP Error 404: Not Found"
         },
         {
           "label": "longcat-2.5-preview-free",
-          "score": null,
-          "error": "HTTP Error 404: Not Found"
-        },
-        {
-          "label": "mimo-v2.5",
           "score": null,
           "error": "HTTP Error 404: Not Found"
         },
@@ -779,7 +769,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
-        "aa_index": null,
+        "aa_index": {
+          "score": 34.8,
+          "label": "deepseek-v4-flash-vision-exp (AA index)"
+        },
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": null
@@ -1284,7 +1277,10 @@
       "aa_score": null,
       "aa_label": null,
       "scores": {
-        "aa_index": null,
+        "aa_index": {
+          "score": 25.2,
+          "label": "mimo-v2.5 (AA index, estimated)"
+        },
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {

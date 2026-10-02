@@ -225,6 +225,22 @@ def pick_row(rows, *wants):
     return rows[0]
 
 
+def parse_int(s):
+    s = s.strip().lower()
+    if s.startswith("unlimited"):
+        return None
+    m = re.match(r"([\d,]+)", s)
+    if not m:
+        raise ValueError(f"unparseable request count: {s!r}")
+    return int(m.group(1).replace(",", ""))
+
+
+def is_requests_table(t):
+    rows = re.findall(r"<tr.*?>(.*?)</tr>", t, re.S)
+    return bool(rows) and [c.lower() for c in cells(rows[0])][:4] == [
+        "model", "requests per 5 hours", "requests per week",
+        "requests per month"]
+
 def main(out_path="data/models.json"):
     html = get(GO_DOCS_URL)
 
@@ -256,8 +272,23 @@ def main(out_path="data/models.json"):
         if a[1:5] != b[1:5]:
             sys.exit(f"price mismatch across plans for {a[0]}")
 
-    ep_tables = parse_tables(html)
-    ep = [t for t in ep_tables if "model id" in "|".join(
+    req_tables = [t for t in parse_tables(html) if is_requests_table(t)]
+    if len(req_tables) != 2:
+        sys.exit(f"expected 2 requests tables (Go + Go Plus), found {len(req_tables)}")
+    # Identify Go vs Go Plus by GLM-5.3-Flash requests/5h (6,320 vs 18,960)
+    req_by_flash = {}
+    for t in req_tables:
+        rows = [cells(r) for r in re.findall(r"<tr.*?>(.*?)</tr>", t, re.S)][1:]
+        req_by_flash[rows[0][1]] = rows
+    go_req = req_by_flash.get("6,320")
+    plus_req = req_by_flash.get("18,960")
+    if go_req is None or plus_req is None:
+        sys.exit(f"could not identify Go/Go Plus requests tables: {sorted(req_by_flash)}")
+    requests_5h = {}
+    for r in go_req:
+        requests_5h[norm(re.sub(r"\s*\(.*", "", r[0]))] = parse_int(r[1])
+
+    ep = [t for t in parse_tables(html) if "model id" in "|".join(
         cells(re.findall(r"<tr.*?>(.*?)</tr>", t, re.S)[0])).lower()]
     if not ep:
         sys.exit("endpoints table not found")
@@ -354,6 +385,7 @@ def main(out_path="data/models.json"):
             "cached_per_1m": cached,
             "monthly_limit_go": parse_limit(priced[5]),
             "monthly_limit_go_plus": parse_limit(plus[5]),
+            "requests_per_5h": requests_5h.get(key),
             "tokens_per_request": ({"input": mix_v[0], "cached": mix_v[1],
                                     "output": mix_v[2], "source": mix_src}
                                    if mix_v else None),

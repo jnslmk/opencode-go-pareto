@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-10-02T14:38:59.897595+00:00",
+    "generated_at": "2026-10-02T18:17:42.406338+00:00",
     "go_docs": "https://opencode.ai/docs/go/",
     "sources": {
       "aa_index": {
@@ -696,6 +696,7 @@
       "cached_per_1m": 0.006,
       "monthly_limit_go": 60.0,
       "monthly_limit_go_plus": 120.0,
+      "requests_per_5h": 26000,
       "tokens_per_request": {
         "input": 410,
         "cached": 71300,
@@ -726,6 +727,7 @@
       "cached_per_1m": 0.006,
       "monthly_limit_go": 30.0,
       "monthly_limit_go_plus": 120.0,
+      "requests_per_5h": 13000,
       "tokens_per_request": {
         "input": 410,
         "cached": 71300,
@@ -759,6 +761,7 @@
       "cached_per_1m": 0.006,
       "monthly_limit_go": 15.0,
       "monthly_limit_go_plus": 60.0,
+      "requests_per_5h": 6500,
       "tokens_per_request": {
         "input": 410,
         "cached": 71300,
@@ -786,6 +789,7 @@
       "cached_per_1m": 0.044,
       "monthly_limit_go": 15.0,
       "monthly_limit_go_plus": 60.0,
+      "requests_per_5h": 1050,
       "tokens_per_request": {
         "input": 750,
         "cached": 82000,
@@ -822,6 +826,7 @@
       "cached_per_1m": 0.26,
       "monthly_limit_go": 60.0,
       "monthly_limit_go_plus": 180.0,
+      "requests_per_5h": 880,
       "tokens_per_request": {
         "input": 700,
         "cached": 52000,
@@ -855,6 +860,7 @@
       "cached_per_1m": 0.26,
       "monthly_limit_go": 15.0,
       "monthly_limit_go_plus": 120.0,
+      "requests_per_5h": 220,
       "tokens_per_request": {
         "input": 1000,
         "cached": 55000,
@@ -891,6 +897,7 @@
       "cached_per_1m": 0.03,
       "monthly_limit_go": 60.0,
       "monthly_limit_go_plus": 180.0,
+      "requests_per_5h": 6320,
       "tokens_per_request": {
         "input": 1000,
         "cached": 55000,
@@ -924,6 +931,7 @@
       "cached_per_1m": 0.02,
       "monthly_limit_go": 15.0,
       "monthly_limit_go_plus": 60.0,
+      "requests_per_5h": 2050,
       "tokens_per_request": {
         "input": 1000,
         "cached": 50000,
@@ -960,6 +968,7 @@
       "cached_per_1m": 0.01,
       "monthly_limit_go": 15.0,
       "monthly_limit_go_plus": 60.0,
+      "requests_per_5h": 4230,
       "tokens_per_request": {
         "input": 1000,
         "cached": 50000,
@@ -996,6 +1005,7 @@
       "cached_per_1m": 0.5,
       "monthly_limit_go": 15.0,
       "monthly_limit_go_plus": 60.0,
+      "requests_per_5h": 169,
       "tokens_per_request": {
         "input": 390,
         "cached": 32500,
@@ -1032,6 +1042,7 @@
       "cached_per_1m": 0.5,
       "monthly_limit_go": 15.0,
       "monthly_limit_go_plus": 60.0,
+      "requests_per_5h": 169,
       "tokens_per_request": {
         "input": 390,
         "cached": 32500,
@@ -1065,6 +1076,7 @@
       "cached_per_1m": 0.035,
       "monthly_limit_go": 60.0,
       "monthly_limit_go_plus": 240.0,
+      "requests_per_5h": 4300,
       "tokens_per_request": {
         "input": 830,
         "cached": 71500,
@@ -1095,6 +1107,7 @@
       "cached_per_1m": 0.042,
       "monthly_limit_go": 30.0,
       "monthly_limit_go_plus": 120.0,
+      "requests_per_5h": 1350,
       "tokens_per_request": {
         "input": 830,
         "cached": 71500,
@@ -1122,6 +1135,7 @@
       "cached_per_1m": 0.16,
       "monthly_limit_go": 60.0,
       "monthly_limit_go_plus": 240.0,
+      "requests_per_5h": 1150,
       "tokens_per_request": {
         "input": 870,
         "cached": 55000,
@@ -1152,6 +1166,7 @@
       "cached_per_1m": 0.19,
       "monthly_limit_go": 60.0,
       "monthly_limit_go_plus": 180.0,
+      "requests_per_5h": 1350,
       "tokens_per_request": {
         "input": 870,
         "cached": 55000,
@@ -1185,6 +1200,7 @@
       "cached_per_1m": 0.3,
       "monthly_limit_go": 15.0,
       "monthly_limit_go_plus": 60.0,
+      "requests_per_5h": 110,
       "tokens_per_request": {
         "input": 1050,
         "cached": 76500,
@@ -1221,6 +1237,7 @@
       "cached_per_1m": 0.006,
       "monthly_limit_go": 60.0,
       "monthly_limit_go_plus": 240.0,
+      "requests_per_5h": 11400,
       "tokens_per_request": {
         "input": 920,
         "cached": 88900,
@@ -1248,6 +1265,7 @@
       "cached_per_1m": 0.0,
       "monthly_limit_go": null,
       "monthly_limit_go_plus": null,
+      "requests_per_5h": null,
       "tokens_per_request": null,
       "cost_per_request_usd": 0.0,
       "aa_score": null,
@@ -1267,6 +1285,7 @@
       "cached_per_1m": 0.0028,
       "monthly_limit_go": 60.0,
       "monthly_limit_go_plus": 120.0,
+      "requests_per_5h": 30100,
       "tokens_per_request": {
         "input": 830,
         "cached": 71500,
@@ -1297,6 +1316,7 @@
       "cached_per_1m": 0.003625,
       "monthly_limit_go": 15.0,
       "monthly_limit_go_plus": 60.0,
+      "requests_per_5h": 3250,
       "tokens_per_request": {
         "input": 830,
         "cached": 71500,
@@ -1327,6 +1347,7 @@
       "cached_per_1m": 0.0028,
       "monthly_limit_go": 60.0,
       "monthly_limit_go_plus": 120.0,
+      "requests_per_5h": 30100,
       "tokens_per_request": {
         "input": 830,
         "cached": 71500,
@@ -1357,6 +1378,7 @@
       "cached_per_1m": 0.003625,
       "monthly_limit_go": 15.0,
       "monthly_limit_go_plus": 60.0,
+      "requests_per_5h": 3250,
       "tokens_per_request": {
         "input": 790,
         "cached": 86000,
@@ -1387,6 +1409,7 @@
       "cached_per_1m": 0.06,
       "monthly_limit_go": 60.0,
       "monthly_limit_go_plus": 240.0,
+      "requests_per_5h": 3400,
       "tokens_per_request": {
         "input": 300,
         "cached": 55000,
@@ -1417,6 +1440,7 @@
       "cached_per_1m": 0.06,
       "monthly_limit_go": 60.0,
       "monthly_limit_go_plus": 180.0,
+      "requests_per_5h": 3200,
       "tokens_per_request": {
         "input": 510,
         "cached": 56000,
@@ -1450,6 +1474,7 @@
       "cached_per_1m": 0.002,
       "monthly_limit_go": 60.0,
       "monthly_limit_go_plus": 120.0,
+      "requests_per_5h": 45300,
       "tokens_per_request": {
         "input": 620,
         "cached": 71400,
@@ -1480,6 +1505,7 @@
       "cached_per_1m": 0.002,
       "monthly_limit_go": 60.0,
       "monthly_limit_go_plus": 120.0,
+      "requests_per_5h": 45300,
       "tokens_per_request": {
         "input": 620,
         "cached": 71400,
@@ -1513,6 +1539,7 @@
       "cached_per_1m": 0.04,
       "monthly_limit_go": 60.0,
       "monthly_limit_go_plus": 180.0,
+      "requests_per_5h": 4300,
       "tokens_per_request": {
         "input": 500,
         "cached": 57000,
@@ -1546,6 +1573,7 @@
       "cached_per_1m": 0.016,
       "monthly_limit_go": 30.0,
       "monthly_limit_go_plus": 90.0,
+      "requests_per_5h": 5400,
       "tokens_per_request": {
         "input": 600,
         "cached": 58000,
@@ -1576,6 +1604,7 @@
       "cached_per_1m": 0.25,
       "monthly_limit_go": 15.0,
       "monthly_limit_go_plus": 60.0,
+      "requests_per_5h": 160,
       "tokens_per_request": {
         "input": 420,
         "cached": 66000,
@@ -1609,6 +1638,7 @@
       "cached_per_1m": 0.0,
       "monthly_limit_go": null,
       "monthly_limit_go_plus": null,
+      "requests_per_5h": null,
       "tokens_per_request": null,
       "cost_per_request_usd": 0.0,
       "aa_score": null,

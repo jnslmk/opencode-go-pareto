@@ -18,14 +18,14 @@ nav button { margin-right: .5rem; }
 </head>
 <body>
 <h1>opencode-go Pareto</h1>
-<p><span id="ylabel">Benchmark score</span> (y) vs estimated opencode-go credits per request in USD (x, log scale).
+<p><span id="ylabel">Benchmark score</span> (y) vs est. requests / 5h on the Go $10/mo plan (x, log scale).
 <span class="frontier">Bold = Pareto-optimal.</span></p>
 <nav id="src"></nav>
 <svg id="chart" width="920" height="520" role="img" aria-label="Pareto chart"></svg>
 <p class="meta" id="meta"></p>
 <h2>All Go models</h2>
 <table id="tbl"><thead><tr>
-<th>Model</th><th id="scorehead">Score</th><th>$/request</th><th>In/out/cache $/1M</th><th>Go limit</th><th>Go+ limit</th><th>Pareto</th>
+<th>Model</th><th id="scorehead">Score</th><th>Req/5h</th><th>$/request</th><th>In/out/cache $/1M</th><th>Pareto</th>
 </tr></thead><tbody></tbody></table>
 <p class="meta" id="foot"></p>
 <script>
@@ -57,8 +57,8 @@ function render(key) {
     `${d.models.filter(m => m.scores[key]).length} with ${src.label} scores.`;
   const svg = document.getElementById("chart");
   svg.innerHTML = "";
-  const pts = d.models.filter(m => m.scores[key] && m.cost_per_request_usd != null)
-    .map(m => ({...m, score: m.scores[key].score, c: Math.max(m.cost_per_request_usd, 1e-5)}));
+  const pts = d.models.filter(m => m.scores[key] && m.requests_per_5h)
+    .map(m => ({...m, score: m.scores[key].score, c: m.requests_per_5h}));
   pts.sort((a, b) => a.c - b.c);
   let best = -1;
   pts.forEach(p => { p.pareto = p.score > best; best = Math.max(best, p.score); });
@@ -73,9 +73,9 @@ function render(key) {
     for (const k in a) e.setAttribute(k, a[k]); svg.appendChild(e); return e; };
   el("line", {x1: L, y1: H - B, x2: W - R, y2: H - B, stroke: "gray"});
   el("line", {x1: L, y1: T, x2: L, y2: H - B, stroke: "gray"});
-  for (let e = Math.ceil(x0); e <= x1; e++) {
+  for (let e = Math.ceil(x0); e <= Math.floor(x1); e++) {
     const t = el("text", {x: X(Math.pow(10, e)), y: H - B + 18, "text-anchor": "middle", fill: "gray"});
-    t.textContent = "$" + Math.pow(10, e).toFixed(e < 0 ? -e > 3 ? 5 : -e : 0);
+    t.textContent = Number(Math.pow(10, e)).toLocaleString();
   }
   for (let s = Math.ceil(y0 / 5) * 5; s <= y1; s += 5) {
     const t = el("text", {x: L - 8, y: Y(s) + 4, "text-anchor": "end", fill: "gray"});
@@ -92,18 +92,17 @@ function render(key) {
     t.textContent = p.id;
   });
   const lx = el("text", {x: (W + L) / 2, y: H - 8, "text-anchor": "middle", fill: "gray"});
-  lx.textContent = "est. credits/request (USD, log)";
+  lx.textContent = "est. requests / 5h on Go ($10/mo plan, log)";
   const tb = document.querySelector("#tbl tbody");
   tb.innerHTML = "";
   const isPar = id => pts.find(p => p.id === id)?.pareto;
   [...d.models].sort((a, b) => ((b.scores[key]?.score) ?? -1) - ((a.scores[key]?.score) ?? -1)).forEach(m => {
     const tr = document.createElement("tr");
     if (m.scores[key] && isPar(m.id)) tr.className = "frontier";
-    const lim = v => v == null ? "unlimited" : "$" + v;
-    tr.innerHTML = `<td>${m.name}</td><td>${m.scores[key]?.score ?? "—"}</td>` +
+    const req = m.requests_per_5h == null ? "unlimited" : m.requests_per_5h.toLocaleString();
+    tr.innerHTML = `<td>${m.name}</td><td>${m.scores[key]?.score ?? "—"}</td><td>${req}</td>` +
       `<td>${m.cost_per_request_usd?.toFixed(4) ?? "—"}</td>` +
       `<td>${m.input_per_1m}/${m.output_per_1m}/${m.cached_per_1m}</td>` +
-      `<td>${lim(m.monthly_limit_go)}</td><td>${lim(m.monthly_limit_go_plus)}</td>` +
       `<td>${m.scores[key] && isPar(m.id) ? "★" : ""}</td>`;
     tb.appendChild(tr);
   });

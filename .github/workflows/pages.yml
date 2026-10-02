@@ -2,7 +2,7 @@ name: pages
 on:
   push:
     branches: [main]
-    paths: ["index.html", "data/models.json"]
+    paths: ["index.html", "data/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
 permissions:
   contents: read

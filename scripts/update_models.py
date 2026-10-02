@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
-"""Refresh data/models.json from official opencode docs + AA coding-agent scores.
+"""Refresh data/models.json from opencode Go docs + coding-benchmark scores.
 
 Sources:
   - Model set, token prices, monthly limits, canonical IDs:
     https://opencode.ai/docs/go/  (usage-limits + endpoints tables)
   - Typical tokens per request (cost formula inputs): same page, token-mix list
-  - AA Coding Agent Index scores (machine-readable mirror of
-    https://artificialanalysis.ai/agents/coding-agents):
-    https://benchlm.ai/md/benchmarks/aacodingagents.md
+  - Score sources (machine-readable mirrors; canonical pages in SOURCES):
+    - AA Coding Agent Index: https://benchlm.ai/md/benchmarks/aacodingagents.md
+    - FrontierCode 1.1 Main: https://benchlm.ai/md/benchmarks/frontiercode.md
+    - BenchLM Coding board:  https://benchlm.ai/md/coding.md
 
 Cost metric (x-axis): estimated USD credits per request =
   input/1e6*input_price + cached/1e6*cached_price + output/1e6*output_price.
 Peak pricing for DeepSeek peak/off-peak rows, base tier for tiered models.
+
+Score matching is exact-only: normalized Go id <-> normalized leaderboard slug
+(dashes/dots stripped). Known renames live in SLUG_REMAP; anything else that
+does not match exactly is reported in meta.unmatched, never guessed.
 
 Stdlib only. Fails loudly on unexpected page shapes (the Action surfaces it).
 """
@@ -22,25 +27,93 @@ import urllib.request
 from datetime import datetime, timezone
 
 GO_DOCS_URL = "https://opencode.ai/docs/go/"
-AA_MD_URL = "https://benchlm.ai/md/benchmarks/aacodingagents.md"
-AA_CANONICAL = "https://artificialanalysis.ai/agents/coding-agents"
+SOURCES = {
+    "aa": {
+        "label": "AA Coding Agent Index",
+        "url": "https://benchlm.ai/md/benchmarks/aacodingagents.md",
+        "canonical": "https://artificialanalysis.ai/agents/coding-agents",
+    },
+    "frontiercode": {
+        "label": "FrontierCode 1.1 Main",
+        "url": "https://benchlm.ai/md/benchmarks/frontiercode.md",
+        "canonical": "https://cognition.com/frontiercode",
+    },
+    "benchlm_coding": {
+        "label": "BenchLM Coding board",
+        "url": "https://benchlm.ai/md/coding.md",
+        "canonical": "https://benchlm.ai/coding",
+    },
+}
 
 UA = {"User-Agent": "opencode-go-pareto-updater/1.0 (+github pages demo)"}
 
-# AA leaderboard model-part -> Go model id (only confident mappings; fuzzy
-# fallback below handles new rows, unmatched ones are reported, not guessed).
-AA_ALIASES = {
-    "glm-5.3": "glm-5.3",
-    "kimi k3": "kimi-k3",
-    "muse spark 1.3": "muse-spark-1.3-contributor",
-    "grok 4.7": "grok-4.7",
-    "grok 4.6": "grok-4.6",
-    "qwen3.8 max": "qwen3.8-max",
-    "gpt-5.6 luna": "gpt-5.6-luna",
-    "gpt-6 luna": "gpt-6-luna",
-    "deepseek v4 pro": "deepseek-v4-pro",
-    "deepseek v4 flash": "deepseek-v4-flash",
+# BenchLM slug -> Go model id for rows that are the same model under another
+# name. Exact matches need no entry. Keep this minimal and explicit.
+SLUG_REMAP = {
+    "deepseek-v4-1-flash": "deepseek-v4.1-flash",
+    "kimi-2-6": "kimi-k2.6",
+    "muse-spark-1-2": "muse-spark-1.2-contributor",
+    "muse-spark-1-1": "muse-spark-1.3-contributor",  # closest older sibling
+    "hy3-preview": "hy3",
+    "deepseek-v4-pro-0813": "deepseek-v4-pro",
+    "deepseek-v4-flash-0731": "deepseek-v4-flash",
+    "kimi-k2-7-code": "kimi-k2.7-code",
 }
+
+def parse_leaderboard(md, key):
+    """Parse one benchlm mirror into {go_id: (score, label)} + unmatched rows.
+
+    AA rows link every row to the same canonical page (agent config in the
+    link text, e.g. "Opencode - GLM-5.3"), so match on the model part of the
+    text. FrontierCode/Coding rows link per-model (/models/<slug>), so match
+    on the exact slug. Both exact-only after normalization.
+    """
+    scores, unmatched = {}, []
+    rows = re.findall(
+        r"\|\s*\d+\s*\|\s*\[(.+?)\]\((.+?)\)\s*\|\s*(.+?)\s*\|\s*([\d.]+)%?\s*\|", md)
+    if not rows:
+        sys.exit(f"{key}: parsed zero leaderboard rows")
+    for label, link, rest, score in rows:
+        score = float(score)
+        if link.startswith("/models/"):
+            slug = link.split("/models/")[1].split("/")[0].split("#")[0]
+            gid = SLUG_REMAP.get(slug, slug)
+        else:
+            part = re.split(r"\s+-\s+", label, maxsplit=1)[-1]
+            part = re.sub(r"\s*\(.*?\)\s*", " ", part).strip()
+            gid = SLUG_REMAP.get(norm(part), norm(part))
+        if gid in scores and scores[gid][0] >= score:
+            continue
+        scores[gid] = (score, label)
+    return scores, unmatched
+
+
+def match_scores(scores_list, go_ids):
+    """Split parsed score dicts into matched {gid: ...} and unmatched lists.
+
+    Exact normalized match first; fallback to a UNIQUE prefix match in either
+    direction ("musespark13" <-> "musespark13contributor"). Ambiguous or
+    missing matches are reported, never guessed.
+    """
+    by_id = {norm(g): g for g in go_ids}
+    matched, unmatched = {}, {}
+    for key, scores in scores_list:
+        m, u = {}, []
+        for gid, (score, label) in scores.items():
+            gid = SLUG_REMAP.get(gid, gid)
+            target = by_id.get(norm(gid))
+            if target is None:
+                cands = [g for n, g in by_id.items()
+                         if n.startswith(norm(gid)) or norm(gid).startswith(n)]
+                target = cands[0] if len(cands) == 1 else None
+            if target is None:
+                u.append({"label": label, "score": score})
+            else:
+                prev = m.get(target)
+                if prev is None or score > prev[0]:
+                    m[target] = (score, label)
+        matched[key], unmatched[key] = m, u
+    return matched, unmatched
 
 
 def get(url):
@@ -173,26 +246,19 @@ def main(out_path="data/models.json"):
         return None, None
 
     # AA scores
-    md = get(AA_MD_URL)
-    scores, unmatched = {}, []
-    for m in re.finditer(r"\|\s*\d+\s*\|\s*\[(.+?)\]\(.+?\)\s*\|\s*(.+?)\s*\|\s*([\d.]+)%\s*\|", md):
-        label, creator, score = m.group(1), m.group(2), float(m.group(3))
-        model_part = re.split(r"\s+-\s+", label, maxsplit=1)[-1]
-        model_part = re.sub(r"\s*\(.*?\)\s*", " ", model_part).strip()
-        gid = AA_ALIASES.get(norm(model_part), None)
-        if gid is None:
-            for alias, g in AA_ALIASES.items():
-                if norm(alias) in norm(model_part) or norm(model_part) in norm(alias):
-                    gid = g
-                    break
-        if gid is None:
-            unmatched.append({"aa_label": label, "creator": creator, "score": score})
-        else:
-            prev = scores.get(gid)
-            if prev is None or score > prev[0]:
-                scores[gid] = (score, label)
-    if not scores:
-        sys.exit("parsed zero AA scores")
+    raw = []
+    for key, src in SOURCES.items():
+        raw.append((key, parse_leaderboard(get(src["url"]), key)[0]))
+    go_ids_pre = []
+    for key in sorted(go_idx):
+        priced = pick_row(go_idx[key])
+        name = re.sub(r"\s*\(.*", "", priced[0]).strip()
+        _, gid = endpoints.get(key, (name, None))
+        go_ids_pre.append(gid or norm(name).replace(" ", "-"))
+    matched, unmatched = match_scores(raw, go_ids_pre)
+    for key, src in SOURCES.items():
+        if not matched[key]:
+            sys.exit(f"{key}: zero scores matched to Go models")
 
     models = []
     missing_mix = []
@@ -216,7 +282,11 @@ def main(out_path="data/models.json"):
         else:
             ti, tc, to = mix_v
             cost = round(ti / 1e6 * inp + tc / 1e6 * cached + to / 1e6 * outp, 6)
-        sc = scores.get(gid)
+        scores = {}
+        for skey in SOURCES:
+            sc = matched[skey].get(gid)
+            scores[skey] = {"score": sc[0], "label": sc[1]} if sc else None
+        aa = scores["aa"]
         models.append({
             "id": gid,
             "name": ep_name if gid in [e[1] for e in endpoints.values()] else name,
@@ -229,8 +299,9 @@ def main(out_path="data/models.json"):
                                     "output": mix_v[2], "source": mix_src}
                                    if mix_v else None),
             "cost_per_request_usd": cost,
-            "aa_score": sc[0] if sc else None,
-            "aa_label": sc[1] if sc else None,
+            "aa_score": aa["score"] if aa else None,  # compat; prefer scores.*
+            "aa_label": aa["label"] if aa else None,
+            "scores": scores,
         })
     if missing_mix:
         sys.exit(f"no token mix for priced models: {missing_mix}")
@@ -241,21 +312,19 @@ def main(out_path="data/models.json"):
         "meta": {
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "go_docs": GO_DOCS_URL,
-            "aa_scores": AA_MD_URL,
-            "aa_canonical": AA_CANONICAL,
+            "sources": {k: v for k, v in SOURCES.items()},
             "method": ("cost_per_request_usd = input/1e6*input_per_1m + "
                        "cached/1e6*cached_per_1m + output/1e6*output_per_1m; "
                        "peak pricing for DeepSeek, base tier for tiered models"),
-            "unmatched_aa_rows": unmatched,
+            "unmatched": unmatched,
         },
         "models": models,
     }
     with open(out_path, "w") as f:
         json.dump(data, f, indent=2)
         f.write("\n")
-    scored = sum(1 for m in models if m["aa_score"] is not None)
-    print(f"wrote {out_path}: {len(models)} models, {scored} with AA scores, "
-          f"{len(unmatched)} unmatched AA rows")
+    cov = {k: sum(1 for m in models if m["scores"][k]) for k in SOURCES}
+    print(f"wrote {out_path}: {len(models)} models, coverage {cov}")
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>opencode-go Pareto: AA score vs credits/request</title>
+<title>opencode-go Pareto: benchmark score vs credits/request</title>
 <style>
 :root { color-scheme: dark light; }
 body { font-family: system-ui, sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
@@ -13,46 +13,64 @@ th, td { border: 1px solid #8884; padding: .25rem .5rem; text-align: right; }
 th:first-child, td:first-child { text-align: left; }
 .frontier { font-weight: bold; }
 svg text { font-size: 11px; }
+nav button { margin-right: .5rem; }
 </style>
 </head>
 <body>
 <h1>opencode-go Pareto</h1>
-<p>Artificial Analysis coding-agent index (y) vs estimated opencode-go credits per request in USD (x, log scale).
+<p><span id="ylabel">Benchmark score</span> (y) vs estimated opencode-go credits per request in USD (x, log scale).
 <span class="frontier">Bold = Pareto-optimal.</span></p>
+<nav id="src"></nav>
 <svg id="chart" width="920" height="520" role="img" aria-label="Pareto chart"></svg>
 <p class="meta" id="meta"></p>
 <h2>All Go models</h2>
 <table id="tbl"><thead><tr>
-<th>Model</th><th>AA score</th><th>$/request</th><th>In/out/cache $/1M</th><th>Go limit</th><th>Go+ limit</th><th>Pareto</th>
+<th>Model</th><th id="scorehead">Score</th><th>$/request</th><th>In/out/cache $/1M</th><th>Go limit</th><th>Go+ limit</th><th>Pareto</th>
 </tr></thead><tbody></tbody></table>
-<p class="meta">Sources: <a href="https://opencode.ai/docs/go/">opencode.ai/docs/go</a> (prices, limits, token mix) ·
-scores mirror <a href="https://benchlm.ai/md/benchmarks/aacodingagents.md">benchlm.ai</a> of
-<a href="https://artificialanalysis.ai/agents/coding-agents">Artificial Analysis coding agents</a>.
-Cost = input·in + cached·cache + output·out per typical request (peak pricing for DeepSeek, base tier otherwise).
-Updated daily by <a href="https://github.com/jnslmk/opencode-go-pareto">GitHub Action</a>.</p>
+<p class="meta" id="foot"></p>
 <script>
+let DATA;
+const NS = "http://www.w3.org/2000/svg";
 fetch("data/models.json").then(r => r.json()).then(d => {
+  DATA = d;
+  const nav = document.getElementById("src");
+  Object.entries(d.meta.sources).forEach(([k, s], i) => {
+    const b = document.createElement("button");
+    b.textContent = s.label;
+    b.onclick = () => render(k);
+    nav.appendChild(b);
+    if (i === 0) render(k);
+  });
+  document.getElementById("foot").innerHTML =
+    `Costs: <a href="https://opencode.ai/docs/go/">opencode.ai/docs/go</a> (prices, limits, token mix). ` +
+    Object.entries(d.meta.sources).map(([k, s]) =>
+      `${s.label}: <a href="${s.url}">mirror</a> · <a href="${s.canonical}">canonical</a>`).join(" · ") +
+    `. Cost = input·in + cached·cache + output·out per typical request (peak pricing for DeepSeek, base tier otherwise). ` +
+    `Updated daily by <a href="https://github.com/jnslmk/opencode-go-pareto">GitHub Action</a>.`;
+});
+function render(key) {
+  const d = DATA, src = d.meta.sources[key];
+  document.getElementById("ylabel").textContent = src.label;
+  document.getElementById("scorehead").textContent = src.label;
   document.getElementById("meta").textContent =
     `Generated ${d.meta.generated_at} · ${d.models.length} Go models, ` +
-    `${d.models.filter(m => m.aa_score != null).length} with AA scores.`;
-  const pts = d.models.filter(m => m.aa_score != null && m.cost_per_request_usd != null)
-    .map(m => ({...m, c: Math.max(m.cost_per_request_usd, 1e-5)}));
-  // Pareto: sort by cost asc, keep running max score
+    `${d.models.filter(m => m.scores[key]).length} with ${src.label} scores.`;
+  const svg = document.getElementById("chart");
+  svg.innerHTML = "";
+  const pts = d.models.filter(m => m.scores[key] && m.cost_per_request_usd != null)
+    .map(m => ({...m, score: m.scores[key].score, c: Math.max(m.cost_per_request_usd, 1e-5)}));
   pts.sort((a, b) => a.c - b.c);
   let best = -1;
-  pts.forEach(p => { p.pareto = p.aa_score > best; best = Math.max(best, p.aa_score); });
+  pts.forEach(p => { p.pareto = p.score > best; best = Math.max(best, p.score); });
   const F = pts.filter(p => p.pareto);
-
   const W = 920, H = 520, L = 60, R = 20, T = 20, B = 50;
-  const svg = document.getElementById("chart");
-  const xs = pts.map(p => Math.log10(p.c)), ys = pts.map(p => p.aa_score);
+  const xs = pts.map(p => Math.log10(p.c)), ys = pts.map(p => p.score);
   const x0 = Math.min(...xs) - .15, x1 = Math.max(...xs) + .15;
   const y0 = Math.min(...ys) - 2, y1 = Math.max(...ys) + 2;
   const X = v => L + (Math.log10(v) - x0) / (x1 - x0) * (W - L - R);
   const Y = v => T + (1 - (v - y0) / (y1 - y0)) * (H - T - B);
-  const el = (t, a) => { const e = document.createElementNS("http://www.w3.org/2000/svg", t);
+  const el = (t, a) => { const e = document.createElementNS(NS, t);
     for (const k in a) e.setAttribute(k, a[k]); svg.appendChild(e); return e; };
-  // axes + ticks
   el("line", {x1: L, y1: H - B, x2: W - R, y2: H - B, stroke: "gray"});
   el("line", {x1: L, y1: T, x2: L, y2: H - B, stroke: "gray"});
   for (let e = Math.ceil(x0); e <= x1; e++) {
@@ -63,34 +81,33 @@ fetch("data/models.json").then(r => r.json()).then(d => {
     const t = el("text", {x: L - 8, y: Y(s) + 4, "text-anchor": "end", fill: "gray"});
     t.textContent = s;
   }
-  // pareto polyline
   if (F.length > 1)
-    el("polyline", {points: F.map(p => `${X(p.c)},${Y(p.aa_score)}`).join(" "),
+    el("polyline", {points: F.map(p => `${X(p.c)},${Y(p.score)}`).join(" "),
       fill: "none", stroke: "#e66", "stroke-width": 2});
-  // points
   pts.forEach(p => {
-    el("circle", {cx: X(p.c), cy: Y(p.aa_score), r: p.pareto ? 6 : 4,
+    el("circle", {cx: X(p.c), cy: Y(p.score), r: p.pareto ? 6 : 4,
       fill: p.pareto ? "#e66" : "none", stroke: p.pareto ? "#e66" : "#4af", "stroke-width": 2});
-    const t = el("text", {x: X(p.c) + 8, y: Y(p.aa_score) + 4,
+    const t = el("text", {x: X(p.c) + 8, y: Y(p.score) + 4,
       fill: p.pareto ? "inherit" : "gray", "font-weight": p.pareto ? "bold" : "normal"});
     t.textContent = p.id;
   });
   const lx = el("text", {x: (W + L) / 2, y: H - 8, "text-anchor": "middle", fill: "gray"});
   lx.textContent = "est. credits/request (USD, log)";
-  // table
   const tb = document.querySelector("#tbl tbody");
-  [...d.models].sort((a, b) => (b.aa_score ?? -1) - (a.aa_score ?? -1)).forEach(m => {
+  tb.innerHTML = "";
+  const isPar = id => pts.find(p => p.id === id)?.pareto;
+  [...d.models].sort((a, b) => ((b.scores[key]?.score) ?? -1) - ((a.scores[key]?.score) ?? -1)).forEach(m => {
     const tr = document.createElement("tr");
-    if (m.aa_score) tr.className = pts.find(p => p.id === m.id)?.pareto ? "frontier" : "";
+    if (m.scores[key] && isPar(m.id)) tr.className = "frontier";
     const lim = v => v == null ? "unlimited" : "$" + v;
-    tr.innerHTML = `<td>${m.name}</td><td>${m.aa_score ?? "—"}</td>` +
+    tr.innerHTML = `<td>${m.name}</td><td>${m.scores[key]?.score ?? "—"}</td>` +
       `<td>${m.cost_per_request_usd?.toFixed(4) ?? "—"}</td>` +
       `<td>${m.input_per_1m}/${m.output_per_1m}/${m.cached_per_1m}</td>` +
       `<td>${lim(m.monthly_limit_go)}</td><td>${lim(m.monthly_limit_go_plus)}</td>` +
-      `<td>${m.aa_score ? (pts.find(p => p.id === m.id)?.pareto ? "★" : "") : ""}</td>`;
+      `<td>${m.scores[key] && isPar(m.id) ? "★" : ""}</td>`;
     tb.appendChild(tr);
   });
-});
+}
 </script>
 </body>
 </html>

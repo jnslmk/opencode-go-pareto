@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-10-05T13:02:02.924478+00:00",
+    "generated_at": "2026-10-06T12:25:56.265821+00:00",
     "go_docs": "https://opencode.ai/docs/go/",
     "sources": {
       "aa_index": {
@@ -193,351 +193,339 @@
       "benchlm_coding": [
         {
           "label": "Claude Sonnet 5.5",
-          "score": 85.6
+          "score": 85.0
         },
         {
           "label": "Claude Opus 5.5",
-          "score": 83.3
+          "score": 83.5
         },
         {
           "label": "Claude Fable 5.1",
-          "score": 79.7
+          "score": 77.8
         },
         {
           "label": "GPT-6 Astra",
-          "score": 74.0
+          "score": 76.5
         },
         {
           "label": "Gemini 4 Argon",
-          "score": 74.0
+          "score": 72.8
         },
         {
           "label": "Claude Fable 5",
-          "score": 73.0
+          "score": 72.1
         },
         {
           "label": "Claude Opus 5",
-          "score": 72.0
-        },
-        {
-          "label": "GPT-5.6 Sol",
-          "score": 70.5
-        },
-        {
-          "label": "GPT-5.6 Terra",
-          "score": 64.3
-        },
-        {
-          "label": "Gemini 3.8 Flash",
-          "score": 63.6
-        },
-        {
-          "label": "GPT-5.5",
-          "score": 62.7
-        },
-        {
-          "label": "Claude Opus 4.8",
-          "score": 62.2
-        },
-        {
-          "label": "GPT-6 Sol",
-          "score": 61.8
-        },
-        {
-          "label": "Step 5 Preview",
-          "score": 61.4
-        },
-        {
-          "label": "Claude Sonnet 5",
-          "score": 59.8
-        },
-        {
-          "label": "Gemini 3.7 Flash",
-          "score": 59.3
+          "score": 71.7
         },
         {
           "label": "GPT-6.1 Sol",
-          "score": 59.0
+          "score": 71.0
+        },
+        {
+          "label": "GPT-5.6 Sol",
+          "score": 69.4
+        },
+        {
+          "label": "GPT-6 Sol",
+          "score": 66.7
+        },
+        {
+          "label": "GPT-5.6 Terra",
+          "score": 64.2
+        },
+        {
+          "label": "Gemini 3.8 Flash",
+          "score": 62.9
+        },
+        {
+          "label": "GPT-5.5",
+          "score": 62.8
+        },
+        {
+          "label": "Step 5 Preview",
+          "score": 61.7
+        },
+        {
+          "label": "Claude Opus 4.8",
+          "score": 61.3
+        },
+        {
+          "label": "Gemini 3.7 Flash",
+          "score": 59.2
+        },
+        {
+          "label": "Claude Sonnet 5",
+          "score": 58.9
         },
         {
           "label": "Grok 4.5",
-          "score": 58.1
-        },
-        {
-          "label": "Claude Opus 4.7",
-          "score": 57.9
-        },
-        {
-          "label": "Claude Opus 4.7 (Adaptive)",
           "score": 57.5
         },
         {
+          "label": "Claude Opus 4.7",
+          "score": 56.5
+        },
+        {
+          "label": "Claude Opus 4.7 (Adaptive)",
+          "score": 56.4
+        },
+        {
           "label": "GPT-5.3 Codex",
-          "score": 56.0
+          "score": 55.6
         },
         {
           "label": "Ornith-1.5-397B",
-          "score": 54.7
-        },
-        {
-          "label": "Claude Opus 4.6 (Adaptive)",
-          "score": 54.0
+          "score": 55.1
         },
         {
           "label": "Gemini 3.6 Flash",
-          "score": 53.6
-        },
-        {
-          "label": "Muse Spark",
-          "score": 53.2
+          "score": 52.6
         },
         {
           "label": "Gemini 3.5 Flash",
-          "score": 52.3
+          "score": 51.5
+        },
+        {
+          "label": "Muse Spark",
+          "score": 51.1
+        },
+        {
+          "label": "Claude Opus 4.6 (Adaptive)",
+          "score": 50.6
         },
         {
           "label": "GLM-5.1",
-          "score": 50.7
+          "score": 49.0
         },
         {
           "label": "GPT-5.4",
-          "score": 49.6
-        },
-        {
-          "label": "Claude Opus 4.6",
-          "score": 49.5
+          "score": 48.7
         },
         {
           "label": "Qwen3.8-27B",
-          "score": 48.8
+          "score": 48.1
+        },
+        {
+          "label": "Claude Opus 4.6",
+          "score": 48.0
         },
         {
           "label": "Claude Sonnet 4.6",
-          "score": 47.1
+          "score": 46.3
         },
         {
           "label": "GPT-5.2-Codex",
-          "score": 46.5
-        },
-        {
-          "label": "Qwen 3.6 Max (preview)",
-          "score": 46.4
-        },
-        {
-          "label": "Gemini 3 Pro",
-          "score": 45.4
+          "score": 45.8
         },
         {
           "label": "Qwen3.7 Max",
-          "score": 45.4
+          "score": 45.3
         },
         {
-          "label": "Apodex 1.1",
-          "score": 44.3
+          "label": "Gemini 3 Pro",
+          "score": 43.7
+        },
+        {
+          "label": "Qwen 3.6 Max (preview)",
+          "score": 43.4
         },
         {
           "label": "Quasar 438B",
-          "score": 43.5
+          "score": 43.3
         },
         {
-          "label": "Claude Opus 4.5",
-          "score": 42.6
+          "label": "Apodex 1.1",
+          "score": 43.2
         },
         {
           "label": "Qwen3.6 Plus",
-          "score": 42.5
+          "score": 41.7
+        },
+        {
+          "label": "Claude Opus 4.5",
+          "score": 41.6
         },
         {
           "label": "Gemini 3.1 Pro",
-          "score": 42.3
+          "score": 41.0
         },
         {
           "label": "MiMo-V2-Pro",
-          "score": 41.5
-        },
-        {
-          "label": "GLM-5",
-          "score": 40.4
+          "score": 40.6
         },
         {
           "label": "Kimi K2.5",
-          "score": 40.1
+          "score": 39.6
         },
         {
           "label": "Inkling-Small",
-          "score": 40.0
+          "score": 39.2
         },
         {
-          "label": "GLM-4.7",
-          "score": 39.6
-        },
-        {
-          "label": "GPT-5.2",
-          "score": 39.6
-        },
-        {
-          "label": "GPT-5.1",
+          "label": "GLM-5",
           "score": 38.9
         },
         {
-          "label": "Gemini 3.5 Flash-Lite",
+          "label": "GPT-5.2",
           "score": 38.2
         },
         {
+          "label": "GLM-4.7",
+          "score": 38.0
+        },
+        {
+          "label": "GPT-5.1",
+          "score": 37.8
+        },
+        {
+          "label": "Gemini 3.5 Flash-Lite",
+          "score": 37.5
+        },
+        {
           "label": "Qwen3.6-27B",
-          "score": 36.9
+          "score": 36.7
         },
         {
           "label": "GPT-5.4 mini",
-          "score": 36.9
-        },
-        {
-          "label": "Inkling",
           "score": 36.4
         },
         {
-          "label": "Gemini 3 Flash",
-          "score": 36.3
-        },
-        {
-          "label": "MiniMax M2.5",
+          "label": "Inkling",
           "score": 35.8
         },
         {
+          "label": "MiniMax M2.5",
+          "score": 35.1
+        },
+        {
           "label": "GPT-5.1-Codex",
-          "score": 35.6
+          "score": 35.0
         },
         {
           "label": "Qwen3.6-35B-A3B",
-          "score": 35.5
+          "score": 34.7
         },
         {
           "label": "GLM-5V-Turbo",
-          "score": 35.4
+          "score": 34.5
         },
         {
           "label": "Qwen3.5-122B-A10B",
-          "score": 35.4
+          "score": 34.3
         },
         {
           "label": "GPT-5 (medium)",
-          "score": 35.3
+          "score": 34.2
+        },
+        {
+          "label": "Gemini 3 Flash",
+          "score": 34.1
         },
         {
           "label": "Qwen3.5-27B",
-          "score": 34.9
-        },
-        {
-          "label": "Gemma 4 31B",
-          "score": 34.4
+          "score": 34.0
         },
         {
           "label": "Ling 3.0 Flash",
-          "score": 33.8
+          "score": 33.6
+        },
+        {
+          "label": "Gemma 4 31B",
+          "score": 33.2
         },
         {
           "label": "Gemma 4 26B A4B",
-          "score": 33.8
+          "score": 32.6
         },
         {
           "label": "Muse Glimmer 30B",
-          "score": 32.9
+          "score": 32.4
         },
         {
           "label": "Step 3.7 Flash",
-          "score": 32.7
-        },
-        {
-          "label": "DeepSeek V3.2 (Thinking)",
-          "score": 31.9
-        },
-        {
-          "label": "DeepSeek V3.2",
-          "score": 31.5
+          "score": 32.1
         },
         {
           "label": "GPT-5.4 nano",
           "score": 31.1
         },
         {
-          "label": "MiMo-V2-Flash",
-          "score": 31.0
+          "label": "DeepSeek V3.2",
+          "score": 30.6
         },
         {
-          "label": "o1",
+          "label": "MiMo-V2-Flash",
           "score": 30.3
         },
         {
-          "label": "GPT-5 mini",
-          "score": 30.0
+          "label": "DeepSeek V3.2 (Thinking)",
+          "score": 30.3
         },
         {
-          "label": "Grok 4.3",
+          "label": "o1",
           "score": 29.4
         },
         {
+          "label": "Grok 4.3",
+          "score": 28.9
+        },
+        {
+          "label": "GPT-5 mini",
+          "score": 28.8
+        },
+        {
           "label": "Qwen3.5-35B-A3B",
-          "score": 28.5
-        },
-        {
-          "label": "Laguna M.1",
-          "score": 28.4
-        },
-        {
-          "label": "GLM-4.6",
-          "score": 27.8
+          "score": 27.3
         },
         {
           "label": "Grok 4.1 Fast (Reasoning)",
-          "score": 27.4
-        },
-        {
-          "label": "Qwen3.5 Flash",
           "score": 26.7
         },
         {
-          "label": "GPT-OSS 120B",
-          "score": 26.3
+          "label": "Laguna M.1",
+          "score": 26.6
+        },
+        {
+          "label": "Qwen3.5 Flash",
+          "score": 26.2
         },
         {
           "label": "Gemini 3.1 Flash-Lite",
-          "score": 26.3
+          "score": 25.9
         },
         {
-          "label": "K-Exaone",
-          "score": 25.5
-        },
-        {
-          "label": "Mistral Medium 3.5 128B",
+          "label": "GLM-4.6",
           "score": 25.3
         },
         {
+          "label": "GPT-OSS 120B",
+          "score": 24.9
+        },
+        {
+          "label": "K-Exaone",
+          "score": 24.8
+        },
+        {
+          "label": "Mistral Medium 3.5 128B",
+          "score": 24.6
+        },
+        {
           "label": "Grok Build 0.1",
-          "score": 25.2
-        },
-        {
-          "label": "Gemini 2.5 Pro",
-          "score": 24.3
-        },
-        {
-          "label": "Gemma 4 12B",
           "score": 24.1
         },
         {
-          "label": "Laguna XS.2",
-          "score": 24.0
+          "label": "Gemini 2.5 Pro",
+          "score": 23.8
         },
         {
           "label": "Ornith-1.5-35B-A3B",
-          "score": 24.0
+          "score": 23.6
         },
         {
-          "label": "o1-preview",
-          "score": 23.4
-        },
-        {
-          "label": "Command A+",
-          "score": 23.3
+          "label": "Gemma 4 12B",
+          "score": 23.2
         },
         {
           "label": "Nemotron 3 Ultra",
@@ -545,127 +533,139 @@
         },
         {
           "label": "Grok 4.20",
-          "score": 23.0
+          "score": 22.9
         },
         {
-          "label": "Grok 4 Fast (Reasoning)",
+          "label": "Laguna XS.2",
           "score": 22.7
         },
         {
-          "label": "GPT-OSS 20B",
-          "score": 21.5
+          "label": "Command A+",
+          "score": 22.5
+        },
+        {
+          "label": "Grok 4 Fast (Reasoning)",
+          "score": 22.2
+        },
+        {
+          "label": "o1-preview",
+          "score": 22.1
         },
         {
           "label": "Mistral Small 4",
-          "score": 21.3
+          "score": 20.5
+        },
+        {
+          "label": "GPT-OSS 20B",
+          "score": 20.2
         },
         {
           "label": "Trinity-Large-Thinking",
-          "score": 20.0
-        },
-        {
-          "label": "GPT-4.1 mini",
-          "score": 19.7
-        },
-        {
-          "label": "Claude Haiku 4.5",
           "score": 19.5
         },
         {
+          "label": "Claude Haiku 4.5",
+          "score": 19.1
+        },
+        {
           "label": "Grok Code Fast 1",
-          "score": 19.3
-        },
-        {
-          "label": "Granite 4.2 8B",
-          "score": 19.0
-        },
-        {
-          "label": "Ling 2.6 Flash",
-          "score": 19.0
+          "score": 18.6
         },
         {
           "label": "Mercury 2.5",
           "score": 18.6
         },
         {
+          "label": "GPT-4.1 mini",
+          "score": 18.5
+        },
+        {
           "label": "Mercury 2",
           "score": 18.4
         },
         {
+          "label": "Granite 4.2 8B",
+          "score": 18.1
+        },
+        {
+          "label": "Ling 2.6 Flash",
+          "score": 18.1
+        },
+        {
           "label": "DeepSeek V3",
-          "score": 18.2
-        },
-        {
-          "label": "Llama 4 Maverick",
-          "score": 17.6
-        },
-        {
-          "label": "Nemotron 3 Nano Omni 30B A3B",
-          "score": 17.5
+          "score": 16.8
         },
         {
           "label": "Mistral Large 3",
-          "score": 17.1
-        },
-        {
-          "label": "Gemini 1.5 Pro",
           "score": 16.7
         },
         {
+          "label": "Nemotron 3 Nano Omni 30B A3B",
+          "score": 16.7
+        },
+        {
+          "label": "Llama 4 Maverick",
+          "score": 16.3
+        },
+        {
+          "label": "Gemini 1.5 Pro",
+          "score": 15.8
+        },
+        {
           "label": "Gemma 4 E4B",
-          "score": 15.0
+          "score": 14.2
         },
         {
           "label": "LFM2.5-2.6B",
-          "score": 14.2
-        },
-        {
-          "label": "GPT-4.1 nano",
-          "score": 14.2
-        },
-        {
-          "label": "Claude 3 Opus",
-          "score": 13.9
-        },
-        {
-          "label": "Gemma 4 E2B",
-          "score": 13.5
-        },
-        {
-          "label": "Llama 4 Scout",
-          "score": 13.4
-        },
-        {
-          "label": "Celeris-1",
           "score": 13.3
         },
         {
-          "label": "GPT-4 Turbo",
-          "score": 13.1
+          "label": "GPT-4.1 nano",
+          "score": 12.8
+        },
+        {
+          "label": "Gemma 4 E2B",
+          "score": 12.6
+        },
+        {
+          "label": "Claude 3 Opus",
+          "score": 12.6
+        },
+        {
+          "label": "Celeris-1",
+          "score": 12.3
+        },
+        {
+          "label": "Llama 4 Scout",
+          "score": 12.0
         },
         {
           "label": "Ministral 3 14B",
-          "score": 13.0
+          "score": 12.0
+        },
+        {
+          "label": "GPT-4 Turbo",
+          "score": 11.7
         },
         {
           "label": "Nemotron 3.5 Lightning 30B A3B NVFP4",
-          "score": 12.1
+          "score": 11.5
         },
         {
           "label": "Gemma 3 27B",
-          "score": 12.1
+          "score": 10.7
         },
         {
           "label": "Ministral 3 8B",
-          "score": 11.6
+          "score": 10.6
         },
         {
           "label": "GPT-4o mini",
-          "score": 11.1
+          "score": 9.7
         },
         {
           "label": "Ministral 3 3B",
-          "score": 10.0
+          "score": 9.0
         }
       ],
       "aa_index": [
@@ -680,7 +680,7 @@
           "error": "HTTP Error 404: Not Found"
         },
         {
-          "label": "space-bunny-free",
+          "label": "space-bunny",
           "score": null,
           "error": "HTTP Error 404: Not Found"
         }
@@ -714,7 +714,7 @@
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 58.8,
+          "score": 62.4,
           "label": "DeepSeek V4.1 Flash"
         }
       }
@@ -813,7 +813,7 @@
           "label": "DeepSeek V4 Pro 0813"
         },
         "benchlm_coding": {
-          "score": 49.2,
+          "score": 48.9,
           "label": "DeepSeek V4 Pro 0813"
         }
       }
@@ -847,7 +847,7 @@
           "label": "GLM-5.2"
         },
         "benchlm_coding": {
-          "score": 56.2,
+          "score": 55.2,
           "label": "GLM-5.2"
         }
       }
@@ -884,7 +884,7 @@
           "label": "GLM-5.3"
         },
         "benchlm_coding": {
-          "score": 56.6,
+          "score": 57.9,
           "label": "GLM-5.3"
         }
       }
@@ -918,7 +918,7 @@
           "label": "GLM-5.3-Flash"
         },
         "benchlm_coding": {
-          "score": 51.5,
+          "score": 50.1,
           "label": "GLM-5.3-Flash"
         }
       }
@@ -955,7 +955,7 @@
           "label": "GPT-5.6 Luna"
         },
         "benchlm_coding": {
-          "score": 63.3,
+          "score": 63.4,
           "label": "GPT-5.6 Luna"
         }
       }
@@ -992,7 +992,7 @@
           "label": "GPT-6 Luna"
         },
         "benchlm_coding": {
-          "score": 50.2,
+          "score": 53.7,
           "label": "GPT-6 Luna"
         }
       }
@@ -1029,7 +1029,7 @@
           "label": "Grok 4.6"
         },
         "benchlm_coding": {
-          "score": 61.4,
+          "score": 60.6,
           "label": "Grok 4.6"
         }
       }
@@ -1094,7 +1094,7 @@
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 51.2,
+          "score": 49.3,
           "label": "Hy3"
         }
       }
@@ -1122,7 +1122,7 @@
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 60.7,
+          "score": 58.0,
           "label": "Hy4 preview"
         }
       }
@@ -1153,7 +1153,7 @@
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 46.0,
+          "score": 44.6,
           "label": "Kimi K2.6"
         }
       }
@@ -1187,7 +1187,7 @@
           "label": "Kimi K2.7"
         },
         "benchlm_coding": {
-          "score": 44.5,
+          "score": 43.6,
           "label": "Kimi K2.7 Code"
         }
       }
@@ -1224,7 +1224,7 @@
           "label": "Kimi K3"
         },
         "benchlm_coding": {
-          "score": 61.4,
+          "score": 60.6,
           "label": "Kimi K3"
         }
       }
@@ -1303,7 +1303,7 @@
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 37.5,
+          "score": 35.9,
           "label": "MiMo-V2.5"
         }
       }
@@ -1334,7 +1334,7 @@
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 45.7,
+          "score": 44.6,
           "label": "MiMo-V2.5-Pro"
         }
       }
@@ -1365,7 +1365,7 @@
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 53.1,
+          "score": 53.0,
           "label": "MiMo-V2.6-Flash"
         }
       }
@@ -1396,7 +1396,7 @@
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 68.0,
+          "score": 63.8,
           "label": "MiMo-V2.6-Pro"
         }
       }
@@ -1427,7 +1427,7 @@
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 36.0,
+          "score": 35.3,
           "label": "MiniMax M2.7"
         }
       }
@@ -1461,7 +1461,7 @@
           "label": "MiniMax M3"
         },
         "benchlm_coding": {
-          "score": 38.7,
+          "score": 37.9,
           "label": "MiniMax M3"
         }
       }
@@ -1492,7 +1492,7 @@
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 55.0,
+          "score": 54.4,
           "label": "Muse Spark 1.2"
         }
       }
@@ -1526,7 +1526,7 @@
         },
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 55.3,
+          "score": 54.1,
           "label": "Muse Spark 1.1"
         }
       }
@@ -1560,7 +1560,7 @@
           "label": "Qwen3.7 Plus"
         },
         "benchlm_coding": {
-          "score": 42.7,
+          "score": 42.1,
           "label": "Qwen3.7 Plus"
         }
       }
@@ -1591,7 +1591,7 @@
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 55.3,
+          "score": 53.3,
           "label": "Qwen3.8-Flash-Next"
         }
       }
@@ -1625,22 +1625,27 @@
         },
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 55.4,
+          "score": 54.5,
           "label": "Qwen3.8 Max"
         }
       }
     },
     {
-      "id": "space-bunny-free",
-      "name": "Space Bunny Free",
-      "input_per_1m": 0.0,
-      "output_per_1m": 0.0,
-      "cached_per_1m": 0.0,
-      "monthly_limit_go": null,
-      "monthly_limit_go_plus": null,
-      "requests_per_5h": null,
-      "tokens_per_request": null,
-      "cost_per_request_usd": 0.0,
+      "id": "space-bunny",
+      "name": "Space Bunny",
+      "input_per_1m": 0.15,
+      "output_per_1m": 0.6,
+      "cached_per_1m": 0.03,
+      "monthly_limit_go": 30.0,
+      "monthly_limit_go_plus": 120.0,
+      "requests_per_5h": 3130,
+      "tokens_per_request": {
+        "input": 1000,
+        "cached": 55000,
+        "output": 200,
+        "source": "Space Bunny"
+      },
+      "cost_per_request_usd": 0.00192,
       "aa_score": null,
       "aa_label": null,
       "scores": {

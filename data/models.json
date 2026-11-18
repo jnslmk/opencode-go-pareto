@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-10-13T13:11:33.330050+00:00",
+    "generated_at": "2026-11-18T22:27:39.631932+00:00",
     "go_docs": "https://opencode.ai/docs/go/",
     "sources": {
       "aa_index": {
@@ -24,68 +24,68 @@
         "canonical": "https://benchlm.ai/coding"
       }
     },
-    "method": "cost_per_request_usd = input/1e6*input_per_1m + cached/1e6*cached_per_1m + output/1e6*output_per_1m; peak pricing for DeepSeek, base tier for tiered models",
+    "method": "requests_per_5h from the Go console limits table; cost_per_request_usd = 0.2 * monthly_limit_go / requests_per_5h; token prices are base Go prices (cost multipliers not applied)",
     "unmatched": {
       "aa": [
         {
-          "label": "Claude Code - Sonnet 5.5 (max)",
-          "score": 68.4
+          "label": "Claude Code - Claude Fable 5.2 (Xhigh, Default Fallback)",
+          "score": 58.5
         },
         {
-          "label": "Muse Code - Muse Wonder Full (max)",
-          "score": 68.0
+          "label": "Devin Fusion CLI - Claude Opus 5.5 Max + GPT-6 Luna High",
+          "score": 58.4
         },
         {
-          "label": "Claude Code - Opus 5.5 (max)",
-          "score": 66.0
+          "label": "Claude Code - Claude Opus 5.5 (Max, Default Fallback)",
+          "score": 58.2
         },
         {
-          "label": "Antigravity CLI - Gemini 4 Argon (high)",
-          "score": 63.8
+          "label": "Claude Code - Claude Sonnet 5.5 (Max, Default Fallback)",
+          "score": 56.3
         },
         {
-          "label": "Muse Code - Muse Wonder (max)",
-          "score": 63.5
+          "label": "Antigravity CLI - Gemini 4 Carbon (High)",
+          "score": 55.5
         },
         {
-          "label": "Codex - GPT-6.1 Sol (xhigh) ({'reasoning_effort': 'xhigh'})",
-          "score": 62.9
+          "label": "Muse Code - Muse Wonder Full (Max)",
+          "score": 54.5
         },
         {
-          "label": "Claude Code - Fable 5.1 (max) (with fallback)",
-          "score": 62.2
+          "label": "Codex - GPT-6 Astra (Max)",
+          "score": 53.1
         },
         {
-          "label": "Devin Fusion CLI - Claude Fable 5.1 XHigh + SWE-2 Medium",
-          "score": 61.7
+          "label": "Claude Code - Claude Fable 5.1 (Max, Default Fallback)",
+          "score": 52.5
         },
         {
-          "label": "Codex - GPT-6 Astra (max)",
-          "score": 61.6
+          "label": "Antigravity CLI - Gemini 4 Hydrogen (Xhigh)",
+          "score": 52.3
         },
         {
-          "label": "Claude Code - Opus 5 (max)",
-          "score": 59.7
+          "label": "Codex - GPT-6.1 Sol (Max)",
+          "score": 52.2
         },
         {
-          "label": "Devin Fusion CLI - GPT-6 Astra XHigh + SWE-2 Medium",
-          "score": 58.9
+          "label": "Codex - GPT-6.1 Terra (Max)",
+          "score": 48.6
         },
         {
-          "label": "Codex - GPT-6 Sol (max)",
-          "score": 56.7
+          "label": "Muse Code - Muse Wonder (Max)",
+          "score": 44.5
         },
         {
-          "label": "Codex - GPT-5.6 Sol (max) ({'reasoning_effort': 'max'})",
-          "score": 54.6
+          "label": "Mistral Vibe - Mistral Large 4 (High)",
+          "score": 40.6
         },
         {
-          "label": "Antigravity SDK - Gemini 3.8 Flash (high)",
-          "score": 41.9
+          "label": "Muse Code - Muse Ember (Max)",
+          "score": 39.7
         },
         {
-          "label": "Claude Code - Haiku 5.5 (xhigh)",
-          "score": 41.4
+          "label": "Mirror - Beam 1.0",
+          "score": 15.5
         }
       ],
       "frontiercode": [
@@ -124,6 +124,10 @@
         {
           "label": "GPT-6 Sol",
           "score": 49.3
+        },
+        {
+          "label": "Grok 4.6",
+          "score": 48.0
         },
         {
           "label": "GPT-5.6 Sol",
@@ -186,6 +190,10 @@
           "score": 24.3
         },
         {
+          "label": "DeepSeek V4 Flash 0731",
+          "score": 18.8
+        },
+        {
           "label": "Inkling",
           "score": 14.0
         },
@@ -204,136 +212,160 @@
       ],
       "benchlm_coding": [
         {
-          "label": "Claude Sonnet 5.5",
-          "score": 83.7
+          "label": "Claude Fable 5.2",
+          "score": 89.7
+        },
+        {
+          "label": "Gemini 4 Carbon",
+          "score": 83.4
         },
         {
           "label": "Claude Opus 5.5",
           "score": 82.9
         },
         {
-          "label": "Claude Fable 5.1",
-          "score": 76.9
+          "label": "Claude Sonnet 5.5",
+          "score": 80.6
         },
         {
           "label": "GPT-6 Astra",
-          "score": 75.7
+          "score": 78.4
         },
         {
-          "label": "Muse Wonder Full",
-          "score": 74.0
+          "label": "Gemini 4 Hydrogen",
+          "score": 75.8
         },
         {
-          "label": "Gemini 4 Argon",
-          "score": 71.6
-        },
-        {
-          "label": "Claude Fable 5",
-          "score": 71.4
-        },
-        {
-          "label": "Claude Opus 5",
-          "score": 70.8
+          "label": "Claude Fable 5.1",
+          "score": 73.7
         },
         {
           "label": "GPT-6.1 Sol",
-          "score": 70.1
+          "score": 72.9
         },
         {
-          "label": "Muse Wonder",
-          "score": 69.8
+          "label": "Muse Wonder Full",
+          "score": 70.2
         },
         {
-          "label": "GPT-5.6 Sol",
-          "score": 68.4
+          "label": "GPT-6.1 Terra",
+          "score": 69.4
+        },
+        {
+          "label": "Claude Fable 5",
+          "score": 67.6
+        },
+        {
+          "label": "Claude Opus 5",
+          "score": 66.8
         },
         {
           "label": "GPT-6 Sol",
-          "score": 65.9
+          "score": 66.7
         },
         {
-          "label": "GPT-5.6 Terra",
-          "score": 63.2
+          "label": "Muse Wonder",
+          "score": 64.8
+        },
+        {
+          "label": "GPT-5.6 Sol",
+          "score": 62.2
+        },
+        {
+          "label": "Kimi K3.1 Pro",
+          "score": 61.3
         },
         {
           "label": "GPT-5.5",
-          "score": 61.6
+          "score": 57.9
         },
         {
-          "label": "Gemini 3.8 Flash",
-          "score": 61.6
-        },
-        {
-          "label": "Claude Opus 4.8",
-          "score": 60.5
-        },
-        {
-          "label": "Gemini 3.7 Flash",
-          "score": 58.1
-        },
-        {
-          "label": "Claude Sonnet 5",
-          "score": 58.0
-        },
-        {
-          "label": "Grok 4.5",
-          "score": 57.0
-        },
-        {
-          "label": "Claude Opus 4.7 (Adaptive)",
-          "score": 55.9
+          "label": "GPT-5.6 Terra",
+          "score": 57.3
         },
         {
           "label": "Claude Opus 4.7",
-          "score": 55.7
+          "score": 56.3
+        },
+        {
+          "label": "Claude Opus 4.8",
+          "score": 55.5
+        },
+        {
+          "label": "Ling 3.1 Flash",
+          "score": 57.3
+        },
+        {
+          "label": "Gemini 3.8 Flash",
+          "score": 55.1
+        },
+        {
+          "label": "Inkling 2 Small",
+          "score": 54.7
+        },
+        {
+          "label": "Grok 4.6",
+          "score": 54.6
+        },
+        {
+          "label": "Gemini 3.7 Flash",
+          "score": 54.5
         },
         {
           "label": "GPT-5.3 Codex",
-          "score": 54.8
+          "score": 52.2
         },
         {
           "label": "Ornith-1.5-397B",
-          "score": 54.3
+          "score": 53.9
         },
         {
-          "label": "Gemini 3.6 Flash",
+          "label": "Claude Sonnet 5",
           "score": 51.6
         },
         {
+          "label": "Muse Spark 1.1",
+          "score": 51.2
+        },
+        {
+          "label": "Sage-A1.5",
+          "score": 53.0
+        },
+        {
+          "label": "Gemini 3.6 Flash",
+          "score": 50.7
+        },
+        {
           "label": "Gemini 3.5 Flash",
-          "score": 50.4
+          "score": 49.8
+        },
+        {
+          "label": "Grok 4.5",
+          "score": 49.1
         },
         {
           "label": "Muse Spark",
-          "score": 50.2
-        },
-        {
-          "label": "Claude Opus 4.6 (Adaptive)",
-          "score": 49.5
+          "score": 48.8
         },
         {
           "label": "GPT-5.4",
-          "score": 48.1
+          "score": 48.8
         },
         {
           "label": "GLM-5.1",
-          "score": 48.0
-        },
-        {
-          "label": "Mistral Large 4",
-          "score": 47.0
+          "score": 46.0
         },
         {
           "label": "Qwen3.8-27B",
-          "score": 46.9
+          "score": 45.8
         },
         {
           "label": "Claude Opus 4.6",
-          "score": 46.7
+          "score": 45.6
         },
         {
-          "label": "Claude Sonnet 4.6",
-          "score": 45.2
+          "label": "Claude Opus 4.6 (Adaptive)",
+          "score": 47.4
         },
         {
           "label": "GPT-5.2-Codex",
@@ -341,539 +373,510 @@
         },
         {
           "label": "Qwen3.7 Max",
+          "score": 44.7
+        },
+        {
+          "label": "Claude Sonnet 4.6",
           "score": 44.5
         },
         {
-          "label": "Qwen 3.6 Max (preview)",
-          "score": 42.8
-        },
-        {
-          "label": "Gemini 3 Pro",
-          "score": 42.6
-        },
-        {
-          "label": "Apodex 1.1",
-          "score": 42.2
-        },
-        {
-          "label": "Quasar 438B",
-          "score": 41.8
+          "label": "Mistral Large 4",
+          "score": 44.0
         },
         {
           "label": "Claude Opus 4.5",
-          "score": 41.0
+          "score": 43.8
+        },
+        {
+          "label": "Kimi K2.6",
+          "score": 42.9
+        },
+        {
+          "label": "Quasar 438B",
+          "score": 44.8
+        },
+        {
+          "label": "MiMo-V2.5-Pro",
+          "score": 42.1
+        },
+        {
+          "label": "Gemini 3 Pro",
+          "score": 43.7
+        },
+        {
+          "label": "Muse Spark Open",
+          "score": 40.3
+        },
+        {
+          "label": "ERNIE 5.5 Flash Preview",
+          "score": 42.0
         },
         {
           "label": "Qwen3.6 Plus",
-          "score": 40.6
+          "score": 39.7
+        },
+        {
+          "label": "Qwen 3.6 Max (preview)",
+          "score": 41.1
         },
         {
           "label": "Gemini 3.1 Pro",
-          "score": 40.0
+          "score": 37.7
         },
         {
-          "label": "MiMo-V2-Pro",
-          "score": 39.0
+          "label": "GLM-4.7",
+          "score": 37.6
+        },
+        {
+          "label": "GPT-5.1",
+          "score": 37.6
+        },
+        {
+          "label": "GPT-5.2",
+          "score": 37.4
+        },
+        {
+          "label": "Inkling-Small",
+          "score": 37.4
         },
         {
           "label": "Kimi K2.5",
           "score": 39.0
         },
         {
-          "label": "Inkling-Small",
-          "score": 38.2
+          "label": "MiMo-V2-Pro",
+          "score": 38.3
         },
         {
           "label": "GLM-5",
           "score": 38.0
         },
         {
-          "label": "GPT-5.2",
-          "score": 37.5
-        },
-        {
-          "label": "GLM-4.7",
-          "score": 37.1
-        },
-        {
-          "label": "GPT-5.1",
-          "score": 36.7
-        },
-        {
-          "label": "Gemini 3.5 Flash-Lite",
-          "score": 36.5
-        },
-        {
-          "label": "GPT-5.4 mini",
+          "label": "MiniMax M2.7",
           "score": 35.6
         },
         {
-          "label": "Qwen3.6-27B",
-          "score": 35.5
-        },
-        {
-          "label": "MiniMax M2.5",
+          "label": "Inkling",
           "score": 34.8
         },
         {
-          "label": "Inkling",
-          "score": 34.7
+          "label": "Ling 3.0 Flash",
+          "score": 34.6
         },
         {
-          "label": "GPT-5.1-Codex",
-          "score": 33.7
+          "label": "Gemini 3.5 Flash-Lite",
+          "score": 34.5
+        },
+        {
+          "label": "MiMo-V2.5",
+          "score": 34.4
+        },
+        {
+          "label": "Qwen3.6-27B",
+          "score": 34.3
         },
         {
           "label": "Qwen3.5-122B-A10B",
-          "score": 33.3
+          "score": 33.9
         },
         {
-          "label": "Gemini 3 Flash",
-          "score": 33.2
+          "label": "GPT-5.4 mini",
+          "score": 33.9
         },
         {
-          "label": "GLM-5V-Turbo",
-          "score": 33.1
+          "label": "MiniMax M2.5",
+          "score": 34.6
         },
         {
-          "label": "Qwen3.5-27B",
-          "score": 32.9
-        },
-        {
-          "label": "GPT-5 (medium)",
-          "score": 32.9
-        },
-        {
-          "label": "Ling 3.0 Flash",
-          "score": 32.6
-        },
-        {
-          "label": "Gemma 4 31B",
-          "score": 32.2
+          "label": "Beam 1.0 501B-A23B",
+          "score": 32.5
         },
         {
           "label": "Qwen3.6-35B-A3B",
+          "score": 34.5
+        },
+        {
+          "label": "GPT-5.1-Codex",
+          "score": 34.3
+        },
+        {
+          "label": "Gemini 3 Flash",
           "score": 32.2
         },
         {
-          "label": "Gemma 4 26B A4B",
-          "score": 31.5
-        },
-        {
-          "label": "Muse Glimmer 30B",
-          "score": 31.2
-        },
-        {
-          "label": "DeepSeek V3.2 (Thinking)",
-          "score": 31.1
+          "label": "GPT-5.4 nano",
+          "score": 30.6
         },
         {
           "label": "Step 3.7 Flash",
-          "score": 30.9
+          "score": 32.5
         },
         {
-          "label": "GPT-5.4 nano",
+          "label": "Qwen3.5-27B",
+          "score": 32.5
+        },
+        {
+          "label": "Apodex 1.1",
+          "score": 32.5
+        },
+        {
+          "label": "GLM-5V-Turbo",
+          "score": 32.4
+        },
+        {
+          "label": "Gemma 4 26B A4B",
           "score": 30.4
         },
         {
-          "label": "DeepSeek V3.2",
-          "score": 29.6
+          "label": "Spark-X2.6-4B",
+          "score": 31.1
+        },
+        {
+          "label": "Gemma 4 31B",
+          "score": 28.7
+        },
+        {
+          "label": "Ministral 3 14B",
+          "score": 30.7
         },
         {
           "label": "MiMo-V2-Flash",
-          "score": 29.1
+          "score": 30.0
         },
         {
-          "label": "o1",
-          "score": 28.5
+          "label": "Ministral 3 8B",
+          "score": 29.8
+        },
+        {
+          "label": "Gemini 3.1 Flash-Lite",
+          "score": 29.6
+        },
+        {
+          "label": "Qwen3.5 Flash",
+          "score": 29.5
+        },
+        {
+          "label": "DeepSeek V3.2",
+          "score": 29.4
+        },
+        {
+          "label": "Ministral 3 3B",
+          "score": 28.9
+        },
+        {
+          "label": "Grok 4.1 Fast (Reasoning)",
+          "score": 28.7
+        },
+        {
+          "label": "Laguna M.1",
+          "score": 26.5
         },
         {
           "label": "Grok 4.3",
-          "score": 28.0
+          "score": 26.5
         },
         {
           "label": "GPT-5 mini",
-          "score": 27.4
+          "score": 27.7
+        },
+        {
+          "label": "Grok Build 0.1",
+          "score": 27.6
+        },
+        {
+          "label": "GLM-4.6",
+          "score": 27.2
         },
         {
           "label": "Qwen3.5-35B-A3B",
           "score": 26.6
         },
         {
-          "label": "Laguna M.1",
-          "score": 26.2
+          "label": "Grok 4.20",
+          "score": 24.4
         },
         {
-          "label": "Ornith-1.5-35B-A3B",
-          "score": 26.1
-        },
-        {
-          "label": "Gemini 3.1 Flash-Lite",
-          "score": 25.3
-        },
-        {
-          "label": "Grok 4.1 Fast (Reasoning)",
-          "score": 25.3
-        },
-        {
-          "label": "Qwen3.5 Flash",
-          "score": 25.0
-        },
-        {
-          "label": "Grok Build 0.1",
-          "score": 24.9
-        },
-        {
-          "label": "GLM-4.6",
-          "score": 24.1
-        },
-        {
-          "label": "GPT-OSS 120B",
-          "score": 23.6
-        },
-        {
-          "label": "Gemma 4 12B",
-          "score": 23.4
-        },
-        {
-          "label": "Mistral Medium 3.5 128B",
-          "score": 23.4
-        },
-        {
-          "label": "K-Exaone",
-          "score": 23.4
-        },
-        {
-          "label": "Gemini 2.5 Pro",
-          "score": 22.8
+          "label": "o1",
+          "score": 26.0
         },
         {
           "label": "Nemotron 3 Ultra",
-          "score": 22.5
+          "score": 23.7
+        },
+        {
+          "label": "Gemma 4 12B",
+          "score": 25.4
         },
         {
           "label": "Laguna XS.2",
-          "score": 22.3
+          "score": 23.1
         },
         {
-          "label": "Grok 4.20",
-          "score": 22.1
-        },
-        {
-          "label": "Command A+",
-          "score": 21.2
+          "label": "K-Exaone",
+          "score": 24.5
         },
         {
           "label": "Grok 4 Fast (Reasoning)",
-          "score": 20.8
+          "score": 24.4
         },
         {
-          "label": "o1-preview",
-          "score": 20.6
+          "label": "Ornith-1.5-35B-A3B",
+          "score": 23.9
         },
         {
-          "label": "Mistral Small 4",
-          "score": 19.1
+          "label": "Gemini 2.5 Pro",
+          "score": 21.8
         },
         {
           "label": "GPT-OSS 20B",
-          "score": 18.7
-        },
-        {
-          "label": "Trinity-Large-Thinking",
-          "score": 18.4
+          "score": 23.5
         },
         {
           "label": "Claude Haiku 4.5",
-          "score": 18.0
+          "score": 23.4
         },
         {
-          "label": "Granite 4.2 8B",
-          "score": 17.8
+          "label": "Muse Glimmer 30B",
+          "score": 23.0
         },
         {
-          "label": "Mercury 2.5",
-          "score": 17.4
+          "label": "o1-preview",
+          "score": 21.5
         },
         {
-          "label": "Nemotron 3.5 Lightning 30B A3B NVFP4",
-          "score": 17.3
+          "label": "Mistral Medium 3.5 128B",
+          "score": 19.5
         },
         {
-          "label": "Grok Code Fast 1",
-          "score": 17.3
-        },
-        {
-          "label": "Mercury 2",
-          "score": 17.2
-        },
-        {
-          "label": "GPT-4.1 mini",
-          "score": 17.2
-        },
-        {
-          "label": "Ling 2.6 Flash",
-          "score": 16.8
+          "label": "GPT-OSS 120B",
+          "score": 21.0
         },
         {
           "label": "Nemotron 3 Nano Omni 30B A3B",
-          "score": 15.9
+          "score": 20.9
         },
         {
-          "label": "DeepSeek V3",
-          "score": 15.8
+          "label": "Trinity-Large-Thinking",
+          "score": 18.6
+        },
+        {
+          "label": "Mercury 2.5",
+          "score": 20.4
+        },
+        {
+          "label": "Grok Code Fast 1",
+          "score": 18.7
+        },
+        {
+          "label": "Ling 2.6 Flash",
+          "score": 18.5
+        },
+        {
+          "label": "Llama 4 Maverick",
+          "score": 18.0
         },
         {
           "label": "Mistral Large 3",
           "score": 15.6
         },
         {
-          "label": "Llama 4 Maverick",
-          "score": 14.8
+          "label": "Celeris-1",
+          "score": 17.6
+        },
+        {
+          "label": "GPT-4.1 mini",
+          "score": 17.6
+        },
+        {
+          "label": "Mercury 2",
+          "score": 15.6
         },
         {
           "label": "Gemini 1.5 Pro",
-          "score": 14.5
+          "score": 16.8
         },
         {
-          "label": "Gemma 4 E4B",
-          "score": 12.9
+          "label": "DeepSeek V3",
+          "score": 16.3
         },
         {
-          "label": "LFM2.5-2.6B",
-          "score": 12.8
+          "label": "Command A+",
+          "score": 15.5
+        },
+        {
+          "label": "Nemotron 3.5 Lightning 30B A3B NVFP4",
+          "score": 14.6
+        },
+        {
+          "label": "Mistral Small 4",
+          "score": 13.5
         },
         {
           "label": "Gemma 4 E2B",
-          "score": 11.3
+          "score": 13.5
         },
         {
-          "label": "GPT-4.1 nano",
-          "score": 11.3
-        },
-        {
-          "label": "Celeris-1",
-          "score": 11.1
-        },
-        {
-          "label": "Claude 3 Opus",
-          "score": 11.0
-        },
-        {
-          "label": "Ministral 3 14B",
-          "score": 10.8
+          "label": "LFM2.5-2.6B",
+          "score": 13.1
         },
         {
           "label": "Llama 4 Scout",
-          "score": 10.5
+          "score": 13.1
+        },
+        {
+          "label": "Granite 4.2 8B",
+          "score": 13.0
+        },
+        {
+          "label": "Claude 3 Opus",
+          "score": 12.2
         },
         {
           "label": "GPT-4 Turbo",
-          "score": 10.1
+          "score": 11.5
         },
         {
-          "label": "Ministral 3 8B",
-          "score": 9.3
+          "label": "GPT-4.1 nano",
+          "score": 10.9
+        },
+        {
+          "label": "LFM3-1.7B",
+          "score": 10.9
+        },
+        {
+          "label": "Gemma 4 E4B",
+          "score": 10.8
         },
         {
           "label": "Gemma 3 27B",
-          "score": 9.2
+          "score": 10.6
         },
         {
           "label": "GPT-4o mini",
-          "score": 8.1
-        },
-        {
-          "label": "Ministral 3 3B",
-          "score": 7.8
+          "score": 7.7
         }
       ],
       "aa_index": [
+        {
+          "label": "beam-free",
+          "score": null,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "label": "glm-5.2",
+          "score": null,
+          "error": "no index (aa glm-5-2)"
+        },
+        {
+          "label": "hy3",
+          "score": null,
+          "error": "no index (aa hy3)"
+        },
+        {
+          "label": "hy4-flash-free",
+          "score": null,
+          "error": "HTTP Error 404: Not Found"
+        },
         {
           "label": "hy4-preview",
           "score": null,
           "error": "HTTP Error 404: Not Found"
         },
         {
-          "label": "longcat-2.5-preview-free",
+          "label": "iceman-contributor-free",
           "score": null,
           "error": "HTTP Error 404: Not Found"
         },
         {
-          "label": "space-bunny",
+          "label": "kimi-k2.7-code",
+          "score": null,
+          "error": "no index (aa kimi-k2-7-code)"
+        },
+        {
+          "label": "kimi-k3",
+          "score": null,
+          "error": "no index (aa kimi-k3)"
+        },
+        {
+          "label": "longcat-2.0",
+          "score": null,
+          "error": "no index (aa longcat-2-0)"
+        },
+        {
+          "label": "longcat-2.5-free",
           "score": null,
           "error": "HTTP Error 404: Not Found"
         },
         {
-          "label": "step-5-preview-free",
+          "label": "muse-spark-1.2-contributor",
           "score": null,
-          "error": "HTTP Error 404: Not Found"
+          "error": "no index (aa muse-spark-1-2)"
+        },
+        {
+          "label": "qwen3.7-plus",
+          "score": null,
+          "error": "no index (aa qwen3-7-plus)"
         }
       ]
     }
   },
   "models": [
     {
-      "id": "claude-haiku-5-5",
-      "name": "Claude Haiku 5.5",
-      "input_per_1m": 0.1,
-      "output_per_1m": 0.5,
-      "cached_per_1m": 0.01,
-      "monthly_limit_go": 15.0,
-      "monthly_limit_go_plus": 60.0,
-      "requests_per_5h": 3850,
-      "tokens_per_request": {
-        "input": 1100,
-        "cached": 55000,
-        "output": 240,
-        "source": "Claude Haiku 5.5"
-      },
-      "cost_per_request_usd": 0.00078,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": {
-          "score": 43.4,
-          "label": "claude-haiku-5-5 (AA index)"
-        },
-        "aa": null,
-        "frontiercode": {
-          "score": 46.4,
-          "label": "Claude Haiku 5.5"
-        },
-        "benchlm_coding": {
-          "score": 51.3,
-          "label": "Claude Haiku 5.5"
-        }
-      }
-    },
-    {
       "id": "deepseek-v4.1-flash",
-      "name": "DeepSeek V4.1 Flash",
-      "input_per_1m": 0.3,
-      "output_per_1m": 1.2,
-      "cached_per_1m": 0.006,
-      "monthly_limit_go": 80.0,
-      "monthly_limit_go_plus": 160.0,
-      "requests_per_5h": 34670,
-      "tokens_per_request": {
-        "input": 410,
-        "cached": 71300,
-        "output": 310,
-        "source": "DeepSeek V4.1 Flash"
-      },
-      "cost_per_request_usd": 0.000923,
-      "aa_score": null,
-      "aa_label": null,
+      "name": "DeepSeek V4.1 Flash 1017",
+      "input_per_1m": 0.15,
+      "output_per_1m": 0.6,
+      "cached_per_1m": 0.003,
+      "monthly_limit_go": 100,
+      "monthly_limit_go_plus": 200,
+      "requests_per_5h": 43300,
+      "cost_per_request_usd": 0.000462,
+      "aa_score": 36.8,
+      "aa_label": "DeepSeek Harness - DeepSeek V4.1 Flash 1017 (Max)",
       "scores": {
         "aa_index": {
-          "score": 39.5,
-          "label": "deepseek-v4.1-flash (AA index)"
-        },
-        "aa": null,
-        "frontiercode": null,
-        "benchlm_coding": {
-          "score": 61.4,
-          "label": "DeepSeek V4.1 Flash"
-        }
-      }
-    },
-    {
-      "id": "deepseek-v4-flash",
-      "name": "DeepSeek V4 Flash",
-      "input_per_1m": 0.3,
-      "output_per_1m": 1.2,
-      "cached_per_1m": 0.006,
-      "monthly_limit_go": 30.0,
-      "monthly_limit_go_plus": 120.0,
-      "requests_per_5h": 13000,
-      "tokens_per_request": {
-        "input": 410,
-        "cached": 71300,
-        "output": 310,
-        "source": "DeepSeek V4 Flash"
-      },
-      "cost_per_request_usd": 0.000923,
-      "aa_score": 38.7,
-      "aa_label": "Codex - DeepSeek V4 Flash 0731 (max)",
-      "scores": {
-        "aa_index": {
-          "score": 34.3,
-          "label": "deepseek-v4-flash (AA index)"
+          "score": 32.6,
+          "label": "deepseek-v4.1-flash (AA index, aa deepseek-v4-1-flash-1017)"
         },
         "aa": {
-          "score": 38.7,
-          "label": "Codex - DeepSeek V4 Flash 0731 (max)"
+          "score": 36.8,
+          "label": "DeepSeek Harness - DeepSeek V4.1 Flash 1017 (Max)"
         },
         "frontiercode": {
-          "score": 18.8,
-          "label": "DeepSeek V4 Flash 0731"
+          "score": 43.9,
+          "label": "DeepSeek V4.1 Flash 1017"
         },
-        "benchlm_coding": null
-      }
-    },
-    {
-      "id": "deepseek-v4-flash-vision-exp",
-      "name": "DeepSeek V4 Flash Vision Exp",
-      "input_per_1m": 0.3,
-      "output_per_1m": 1.2,
-      "cached_per_1m": 0.006,
-      "monthly_limit_go": 15.0,
-      "monthly_limit_go_plus": 60.0,
-      "requests_per_5h": 6500,
-      "tokens_per_request": {
-        "input": 410,
-        "cached": 71300,
-        "output": 310,
-        "source": "DeepSeek V4 Flash"
-      },
-      "cost_per_request_usd": 0.000923,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": {
-          "score": 34.8,
-          "label": "deepseek-v4-flash-vision-exp (AA index)"
-        },
-        "aa": null,
-        "frontiercode": null,
-        "benchlm_coding": null
+        "benchlm_coding": {
+          "score": 59.8,
+          "label": "DeepSeek V4.1 Flash 1017"
+        }
       }
     },
     {
       "id": "deepseek-v4-pro",
       "name": "DeepSeek V4 Pro",
-      "input_per_1m": 1.32,
-      "output_per_1m": 3.96,
-      "cached_per_1m": 0.044,
-      "monthly_limit_go": 15.0,
-      "monthly_limit_go_plus": 60.0,
-      "requests_per_5h": 1050,
-      "tokens_per_request": {
-        "input": 750,
-        "cached": 82000,
-        "output": 290,
-        "source": "DeepSeek V4 Pro"
-      },
-      "cost_per_request_usd": 0.005746,
-      "aa_score": 43.1,
-      "aa_label": "Codex - DeepSeek V4 Pro 0813 (max)",
+      "input_per_1m": 0.66,
+      "output_per_1m": 1.98,
+      "cached_per_1m": 0.022,
+      "monthly_limit_go": 15,
+      "monthly_limit_go_plus": 60,
+      "requests_per_5h": 1040,
+      "cost_per_request_usd": 0.002885,
+      "aa_score": null,
+      "aa_label": null,
       "scores": {
         "aa_index": {
-          "score": 36.0,
-          "label": "deepseek-v4-pro (AA index)"
+          "score": 23.1,
+          "label": "deepseek-v4-pro (AA index, aa deepseek-v4-pro)"
         },
-        "aa": {
-          "score": 43.1,
-          "label": "Codex - DeepSeek V4 Pro 0813 (max)"
-        },
+        "aa": null,
         "frontiercode": {
           "score": 28.5,
-          "label": "DeepSeek V4 Pro 0813"
+          "label": "DeepSeek V4 Pro"
         },
         "benchlm_coding": {
-          "score": 47.8,
-          "label": "DeepSeek V4 Pro 0813"
+          "score": 51.4,
+          "label": "DeepSeek V4 Pro"
         }
       }
     },
@@ -883,30 +886,21 @@
       "input_per_1m": 1.4,
       "output_per_1m": 4.4,
       "cached_per_1m": 0.26,
-      "monthly_limit_go": 60.0,
-      "monthly_limit_go_plus": 180.0,
-      "requests_per_5h": 880,
-      "tokens_per_request": {
-        "input": 700,
-        "cached": 52000,
-        "output": 150,
-        "source": "GLM-5.3/5.2"
-      },
-      "cost_per_request_usd": 0.01516,
+      "monthly_limit_go": 60,
+      "monthly_limit_go_plus": 180,
+      "requests_per_5h": 792,
+      "cost_per_request_usd": 0.015152,
       "aa_score": null,
       "aa_label": null,
       "scores": {
-        "aa_index": {
-          "score": 33.7,
-          "label": "glm-5.2 (AA index)"
-        },
+        "aa_index": null,
         "aa": null,
         "frontiercode": {
           "score": 24.5,
           "label": "GLM-5.2"
         },
         "benchlm_coding": {
-          "score": 54.2,
+          "score": 51.9,
           "label": "GLM-5.2"
         }
       }
@@ -917,208 +911,51 @@
       "input_per_1m": 1.4,
       "output_per_1m": 4.4,
       "cached_per_1m": 0.26,
-      "monthly_limit_go": 15.0,
-      "monthly_limit_go_plus": 120.0,
-      "requests_per_5h": 220,
-      "tokens_per_request": {
-        "input": 1000,
-        "cached": 55000,
-        "output": 200,
-        "source": "GLM-5.3-Flash"
-      },
-      "cost_per_request_usd": 0.01658,
-      "aa_score": 53.6,
-      "aa_label": "Opencode - GLM-5.3 ({'reasoning_effort': 'max'})",
+      "monthly_limit_go": 500,
+      "monthly_limit_go_plus": 1000,
+      "requests_per_5h": 6600,
+      "cost_per_request_usd": 0.015152,
+      "aa_score": 40.1,
+      "aa_label": "Opencode - GLM-5.3 (Max)",
       "scores": {
         "aa_index": {
-          "score": 44.8,
-          "label": "glm-5.3 (AA index)"
+          "score": 31.7,
+          "label": "glm-5.3 (AA index, aa glm-5-3)"
         },
         "aa": {
-          "score": 53.6,
-          "label": "Opencode - GLM-5.3 ({'reasoning_effort': 'max'})"
+          "score": 40.1,
+          "label": "Opencode - GLM-5.3 (Max)"
         },
         "frontiercode": {
           "score": 40.1,
           "label": "GLM-5.3"
         },
         "benchlm_coding": {
-          "score": 56.7,
+          "score": 54.2,
           "label": "GLM-5.3"
-        }
-      }
-    },
-    {
-      "id": "glm-5.3-flash",
-      "name": "GLM-5.3-Flash",
-      "input_per_1m": 0.15,
-      "output_per_1m": 0.5,
-      "cached_per_1m": 0.03,
-      "monthly_limit_go": 60.0,
-      "monthly_limit_go_plus": 180.0,
-      "requests_per_5h": 6320,
-      "tokens_per_request": {
-        "input": 1000,
-        "cached": 55000,
-        "output": 200,
-        "source": "GLM-5.3-Flash"
-      },
-      "cost_per_request_usd": 0.0019,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": {
-          "score": 41.8,
-          "label": "glm-5.3-flash (AA index)"
-        },
-        "aa": null,
-        "frontiercode": {
-          "score": 31.8,
-          "label": "GLM-5.3-Flash"
-        },
-        "benchlm_coding": {
-          "score": 48.8,
-          "label": "GLM-5.3-Flash"
-        }
-      }
-    },
-    {
-      "id": "gpt-5.6-luna",
-      "name": "GPT 5.6 Luna",
-      "input_per_1m": 0.2,
-      "output_per_1m": 1.2,
-      "cached_per_1m": 0.02,
-      "monthly_limit_go": 15.0,
-      "monthly_limit_go_plus": 60.0,
-      "requests_per_5h": 2050,
-      "tokens_per_request": {
-        "input": 1000,
-        "cached": 50000,
-        "output": 220,
-        "source": "GPT 5.6 Luna"
-      },
-      "cost_per_request_usd": 0.001464,
-      "aa_score": 43.2,
-      "aa_label": "Codex - GPT-5.6 Luna (max)",
-      "scores": {
-        "aa_index": {
-          "score": 37.3,
-          "label": "gpt-5.6-luna (AA index)"
-        },
-        "aa": {
-          "score": 43.2,
-          "label": "Codex - GPT-5.6 Luna (max)"
-        },
-        "frontiercode": {
-          "score": 39.8,
-          "label": "GPT-5.6 Luna"
-        },
-        "benchlm_coding": {
-          "score": 62.4,
-          "label": "GPT-5.6 Luna"
-        }
-      }
-    },
-    {
-      "id": "gpt-6-luna",
-      "name": "GPT 6 Luna",
-      "input_per_1m": 0.1,
-      "output_per_1m": 0.5,
-      "cached_per_1m": 0.01,
-      "monthly_limit_go": 15.0,
-      "monthly_limit_go_plus": 60.0,
-      "requests_per_5h": 4230,
-      "tokens_per_request": {
-        "input": 1000,
-        "cached": 50000,
-        "output": 220,
-        "source": "GPT 6 Luna"
-      },
-      "cost_per_request_usd": 0.00071,
-      "aa_score": 41.1,
-      "aa_label": "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})",
-      "scores": {
-        "aa_index": {
-          "score": 38.1,
-          "label": "gpt-6-luna (AA index)"
-        },
-        "aa": {
-          "score": 41.1,
-          "label": "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})"
-        },
-        "frontiercode": {
-          "score": 42.4,
-          "label": "GPT-6 Luna"
-        },
-        "benchlm_coding": {
-          "score": 53.3,
-          "label": "GPT-6 Luna"
-        }
-      }
-    },
-    {
-      "id": "grok-4.6",
-      "name": "Grok 4.6",
-      "input_per_1m": 2.0,
-      "output_per_1m": 6.0,
-      "cached_per_1m": 0.5,
-      "monthly_limit_go": 15.0,
-      "monthly_limit_go_plus": 60.0,
-      "requests_per_5h": 169,
-      "tokens_per_request": {
-        "input": 390,
-        "cached": 32500,
-        "output": 120,
-        "source": "Grok 4.7/4.6"
-      },
-      "cost_per_request_usd": 0.01775,
-      "aa_score": 47.0,
-      "aa_label": "Grok Build - Grok 4.6 (xhigh)",
-      "scores": {
-        "aa_index": {
-          "score": 44.3,
-          "label": "grok-4.6 (AA index)"
-        },
-        "aa": {
-          "score": 47.0,
-          "label": "Grok Build - Grok 4.6 (xhigh)"
-        },
-        "frontiercode": {
-          "score": 48.0,
-          "label": "Grok 4.6"
-        },
-        "benchlm_coding": {
-          "score": 59.3,
-          "label": "Grok 4.6"
         }
       }
     },
     {
       "id": "grok-4.7",
       "name": "Grok 4.7",
-      "input_per_1m": 2.0,
-      "output_per_1m": 6.0,
+      "input_per_1m": 2,
+      "output_per_1m": 6,
       "cached_per_1m": 0.5,
-      "monthly_limit_go": 15.0,
-      "monthly_limit_go_plus": 60.0,
+      "monthly_limit_go": 15,
+      "monthly_limit_go_plus": 60,
       "requests_per_5h": 169,
-      "tokens_per_request": {
-        "input": 390,
-        "cached": 32500,
-        "output": 120,
-        "source": "Grok 4.7/4.6"
-      },
-      "cost_per_request_usd": 0.01775,
-      "aa_score": 56.3,
-      "aa_label": "Grok Build - Grok 4.7 (xhigh)",
+      "cost_per_request_usd": 0.017751,
+      "aa_score": 41.6,
+      "aa_label": "Grok Build - Grok 4.7 (Xhigh)",
       "scores": {
         "aa_index": {
-          "score": 46.4,
-          "label": "grok-4.7 (AA index)"
+          "score": 35.5,
+          "label": "grok-4.7 (AA index, aa grok-4-7)"
         },
         "aa": {
-          "score": 56.3,
-          "label": "Grok Build - Grok 4.7 (xhigh)"
+          "score": 41.6,
+          "label": "Grok Build - Grok 4.7 (Xhigh)"
         },
         "frontiercode": {
           "score": 47.6,
@@ -1128,430 +965,23 @@
       }
     },
     {
-      "id": "hy3",
-      "name": "Hy3",
-      "input_per_1m": 0.14,
-      "output_per_1m": 0.58,
-      "cached_per_1m": 0.035,
-      "monthly_limit_go": 60.0,
-      "monthly_limit_go_plus": 240.0,
-      "requests_per_5h": 4300,
-      "tokens_per_request": {
-        "input": 830,
-        "cached": 71500,
-        "output": 295,
-        "source": "Hy3"
-      },
-      "cost_per_request_usd": 0.00279,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": {
-          "score": 25.3,
-          "label": "hy3 (AA index)"
-        },
-        "aa": null,
-        "frontiercode": null,
-        "benchlm_coding": {
-          "score": 48.5,
-          "label": "Hy3"
-        }
-      }
-    },
-    {
-      "id": "hy4-preview",
-      "name": "Hy4 preview",
-      "input_per_1m": 0.834,
-      "output_per_1m": 2.501,
-      "cached_per_1m": 0.042,
-      "monthly_limit_go": 30.0,
-      "monthly_limit_go_plus": 120.0,
-      "requests_per_5h": 1350,
-      "tokens_per_request": {
-        "input": 830,
-        "cached": 71500,
-        "output": 295,
-        "source": "Hy4 preview"
-      },
-      "cost_per_request_usd": 0.004433,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": null,
-        "aa": null,
-        "frontiercode": null,
-        "benchlm_coding": {
-          "score": 57.2,
-          "label": "Hy4 preview"
-        }
-      }
-    },
-    {
-      "id": "kimi-k2.6",
-      "name": "Kimi K2.6",
-      "input_per_1m": 0.95,
-      "output_per_1m": 4.0,
-      "cached_per_1m": 0.16,
-      "monthly_limit_go": 60.0,
-      "monthly_limit_go_plus": 240.0,
-      "requests_per_5h": 1150,
-      "tokens_per_request": {
-        "input": 870,
-        "cached": 55000,
-        "output": 200,
-        "source": "Kimi K2.7/K2.6"
-      },
-      "cost_per_request_usd": 0.010427,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": {
-          "score": 27.0,
-          "label": "kimi-k2.6 (AA index)"
-        },
-        "aa": null,
-        "frontiercode": null,
-        "benchlm_coding": {
-          "score": 43.7,
-          "label": "Kimi K2.6"
-        }
-      }
-    },
-    {
-      "id": "kimi-k2.7-code",
-      "name": "Kimi K2.7 Code",
-      "input_per_1m": 0.95,
-      "output_per_1m": 4.0,
-      "cached_per_1m": 0.19,
-      "monthly_limit_go": 60.0,
-      "monthly_limit_go_plus": 180.0,
-      "requests_per_5h": 1350,
-      "tokens_per_request": {
-        "input": 870,
-        "cached": 55000,
-        "output": 200,
-        "source": "Kimi K2.7/K2.6"
-      },
-      "cost_per_request_usd": 0.012077,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": {
-          "score": 25.8,
-          "label": "kimi-k2.7-code (AA index)"
-        },
-        "aa": null,
-        "frontiercode": {
-          "score": 30.1,
-          "label": "Kimi K2.7"
-        },
-        "benchlm_coding": {
-          "score": 42.4,
-          "label": "Kimi K2.7 Code"
-        }
-      }
-    },
-    {
-      "id": "kimi-k3",
-      "name": "Kimi K3",
-      "input_per_1m": 3.0,
-      "output_per_1m": 15.0,
-      "cached_per_1m": 0.3,
-      "monthly_limit_go": 15.0,
-      "monthly_limit_go_plus": 60.0,
-      "requests_per_5h": 110,
-      "tokens_per_request": {
-        "input": 1050,
-        "cached": 76500,
-        "output": 300,
-        "source": "Kimi K3"
-      },
-      "cost_per_request_usd": 0.0306,
-      "aa_score": 51.9,
-      "aa_label": "Kimi Code CLI - Kimi K3",
-      "scores": {
-        "aa_index": {
-          "score": 43.6,
-          "label": "kimi-k3 (AA index)"
-        },
-        "aa": {
-          "score": 51.9,
-          "label": "Kimi Code CLI - Kimi K3"
-        },
-        "frontiercode": {
-          "score": 44.2,
-          "label": "Kimi K3"
-        },
-        "benchlm_coding": {
-          "score": 59.3,
-          "label": "Kimi K3"
-        }
-      }
-    },
-    {
-      "id": "longcat-2.0",
-      "name": "LongCat-2.0",
-      "input_per_1m": 0.3,
-      "output_per_1m": 1.2,
-      "cached_per_1m": 0.006,
-      "monthly_limit_go": 60.0,
-      "monthly_limit_go_plus": 240.0,
-      "requests_per_5h": 11400,
-      "tokens_per_request": {
-        "input": 920,
-        "cached": 88900,
-        "output": 200,
-        "source": "LongCat-2.0"
-      },
-      "cost_per_request_usd": 0.001049,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": {
-          "score": 19.1,
-          "label": "longcat-2.0 (AA index)"
-        },
-        "aa": null,
-        "frontiercode": null,
-        "benchlm_coding": null
-      }
-    },
-    {
-      "id": "longcat-2.5-preview-free",
-      "name": "LongCat 2.5 Preview Free",
-      "input_per_1m": 0.0,
-      "output_per_1m": 0.0,
-      "cached_per_1m": 0.0,
-      "monthly_limit_go": null,
-      "monthly_limit_go_plus": null,
-      "requests_per_5h": null,
-      "tokens_per_request": null,
-      "cost_per_request_usd": 0.0,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": null,
-        "aa": null,
-        "frontiercode": null,
-        "benchlm_coding": null
-      }
-    },
-    {
-      "id": "mimo-v2.5",
-      "name": "MiMo-V2.5",
-      "input_per_1m": 0.14,
-      "output_per_1m": 0.28,
-      "cached_per_1m": 0.0028,
-      "monthly_limit_go": 60.0,
-      "monthly_limit_go_plus": 120.0,
-      "requests_per_5h": 30100,
-      "tokens_per_request": {
-        "input": 830,
-        "cached": 71500,
-        "output": 295,
-        "source": "MiMo-V2.5"
-      },
-      "cost_per_request_usd": 0.000399,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": {
-          "score": 25.2,
-          "label": "mimo-v2.5 (AA index, estimated)"
-        },
-        "aa": null,
-        "frontiercode": null,
-        "benchlm_coding": {
-          "score": 35.4,
-          "label": "MiMo-V2.5"
-        }
-      }
-    },
-    {
-      "id": "mimo-v2.5-pro",
-      "name": "MiMo-V2.5-Pro",
-      "input_per_1m": 0.435,
-      "output_per_1m": 0.87,
-      "cached_per_1m": 0.003625,
-      "monthly_limit_go": 15.0,
-      "monthly_limit_go_plus": 60.0,
-      "requests_per_5h": 3250,
-      "tokens_per_request": {
-        "input": 830,
-        "cached": 71500,
-        "output": 295,
-        "source": "MiMo-V2.5"
-      },
-      "cost_per_request_usd": 0.000877,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": {
-          "score": 26.0,
-          "label": "mimo-v2.5-pro (AA index)"
-        },
-        "aa": null,
-        "frontiercode": null,
-        "benchlm_coding": {
-          "score": 43.8,
-          "label": "MiMo-V2.5-Pro"
-        }
-      }
-    },
-    {
-      "id": "mimo-v2.6-flash",
-      "name": "MiMo-V2.6-Flash",
-      "input_per_1m": 0.14,
-      "output_per_1m": 0.28,
-      "cached_per_1m": 0.0028,
-      "monthly_limit_go": 60.0,
-      "monthly_limit_go_plus": 120.0,
-      "requests_per_5h": 30100,
-      "tokens_per_request": {
-        "input": 830,
-        "cached": 71500,
-        "output": 295,
-        "source": "MiMo-V2.6-Flash"
-      },
-      "cost_per_request_usd": 0.000399,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": {
-          "score": 37.9,
-          "label": "mimo-v2.6-flash (AA index)"
-        },
-        "aa": null,
-        "frontiercode": null,
-        "benchlm_coding": {
-          "score": 60.6,
-          "label": "MiMo-V2.6-Flash"
-        }
-      }
-    },
-    {
-      "id": "mimo-v2.6-pro",
-      "name": "MiMo-V2.6-Pro",
-      "input_per_1m": 0.435,
-      "output_per_1m": 0.87,
-      "cached_per_1m": 0.003625,
-      "monthly_limit_go": 15.0,
-      "monthly_limit_go_plus": 60.0,
-      "requests_per_5h": 3250,
-      "tokens_per_request": {
-        "input": 790,
-        "cached": 86000,
-        "output": 305,
-        "source": "MiMo-V2.6-Pro"
-      },
-      "cost_per_request_usd": 0.000921,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": {
-          "score": 46.3,
-          "label": "mimo-v2.6-pro (AA index)"
-        },
-        "aa": null,
-        "frontiercode": null,
-        "benchlm_coding": {
-          "score": 63.7,
-          "label": "MiMo-V2.6-Pro"
-        }
-      }
-    },
-    {
-      "id": "minimax-m2.7",
-      "name": "MiniMax M2.7",
-      "input_per_1m": 0.3,
-      "output_per_1m": 1.2,
-      "cached_per_1m": 0.06,
-      "monthly_limit_go": 60.0,
-      "monthly_limit_go_plus": 240.0,
-      "requests_per_5h": 3400,
-      "tokens_per_request": {
-        "input": 300,
-        "cached": 55000,
-        "output": 125,
-        "source": "MiniMax M2.7"
-      },
-      "cost_per_request_usd": 0.00354,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": {
-          "score": 22.8,
-          "label": "minimax-m2.7 (AA index)"
-        },
-        "aa": null,
-        "frontiercode": null,
-        "benchlm_coding": {
-          "score": 35.1,
-          "label": "MiniMax M2.7"
-        }
-      }
-    },
-    {
-      "id": "minimax-m3",
-      "name": "MiniMax M3",
-      "input_per_1m": 0.3,
-      "output_per_1m": 1.2,
-      "cached_per_1m": 0.06,
-      "monthly_limit_go": 60.0,
-      "monthly_limit_go_plus": 180.0,
-      "requests_per_5h": 3200,
-      "tokens_per_request": {
-        "input": 510,
-        "cached": 56000,
-        "output": 190,
-        "source": "MiniMax M3"
-      },
-      "cost_per_request_usd": 0.003741,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": {
-          "score": 29.2,
-          "label": "minimax-m3 (AA index)"
-        },
-        "aa": null,
-        "frontiercode": {
-          "score": 14.7,
-          "label": "MiniMax M3"
-        },
-        "benchlm_coding": {
-          "score": 37.0,
-          "label": "MiniMax M3"
-        }
-      }
-    },
-    {
       "id": "muse-spark-1.2-contributor",
       "name": "Muse Spark 1.2 Contributor",
       "input_per_1m": 0.1,
       "output_per_1m": 0.2,
       "cached_per_1m": 0.002,
-      "monthly_limit_go": 60.0,
-      "monthly_limit_go_plus": 120.0,
+      "monthly_limit_go": 60,
+      "monthly_limit_go_plus": 120,
       "requests_per_5h": 45300,
-      "tokens_per_request": {
-        "input": 620,
-        "cached": 71400,
-        "output": 300,
-        "source": "Muse Spark 1.2 Contributor"
-      },
       "cost_per_request_usd": 0.000265,
       "aa_score": null,
       "aa_label": null,
       "scores": {
-        "aa_index": {
-          "score": 39.6,
-          "label": "muse-spark-1.2-contributor (AA index)"
-        },
+        "aa_index": null,
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 53.2,
+          "score": 49.6,
           "label": "Muse Spark 1.2"
         }
       }
@@ -1562,149 +992,350 @@
       "input_per_1m": 0.1,
       "output_per_1m": 0.2,
       "cached_per_1m": 0.002,
-      "monthly_limit_go": 60.0,
-      "monthly_limit_go_plus": 120.0,
+      "monthly_limit_go": 60,
+      "monthly_limit_go_plus": 120,
       "requests_per_5h": 45300,
-      "tokens_per_request": {
-        "input": 620,
-        "cached": 71400,
-        "output": 300,
-        "source": "Muse Spark 1.3 Contributor"
-      },
       "cost_per_request_usd": 0.000265,
-      "aa_score": 54.3,
-      "aa_label": "Muse Code - Muse Spark 1.3 (max)",
+      "aa_score": 36.8,
+      "aa_label": "Muse Code - Muse Spark 1.3 (Max)",
       "scores": {
         "aa_index": {
-          "score": 48.1,
-          "label": "muse-spark-1.3-contributor (AA index)"
+          "score": 36.6,
+          "label": "muse-spark-1.3-contributor (AA index, aa muse-spark-1-3)"
         },
         "aa": {
-          "score": 54.3,
-          "label": "Muse Code - Muse Spark 1.3 (max)"
+          "score": 36.8,
+          "label": "Muse Code - Muse Spark 1.3 (Max)"
         },
         "frontiercode": null,
-        "benchlm_coding": {
-          "score": 53.0,
-          "label": "Muse Spark 1.1"
-        }
+        "benchlm_coding": null
       }
     },
     {
-      "id": "qwen3.7-plus",
-      "name": "Qwen3.7 Plus",
-      "input_per_1m": 0.4,
-      "output_per_1m": 1.6,
-      "cached_per_1m": 0.04,
-      "monthly_limit_go": 60.0,
-      "monthly_limit_go_plus": 180.0,
-      "requests_per_5h": 4300,
-      "tokens_per_request": {
-        "input": 500,
-        "cached": 57000,
-        "output": 190,
-        "source": "Qwen3.7 Plus"
-      },
-      "cost_per_request_usd": 0.002784,
+      "id": "glm-5.3-flash",
+      "name": "GLM-5.3-Flash",
+      "input_per_1m": 0.15,
+      "output_per_1m": 0.5,
+      "cached_per_1m": 0.03,
+      "monthly_limit_go": 60,
+      "monthly_limit_go_plus": 180,
+      "requests_per_5h": 6320,
+      "cost_per_request_usd": 0.001899,
       "aa_score": null,
       "aa_label": null,
       "scores": {
         "aa_index": {
-          "score": 25.2,
-          "label": "qwen3.7-plus (AA index)"
+          "score": 27.8,
+          "label": "glm-5.3-flash (AA index, aa glm-5-3-flash)"
         },
         "aa": null,
         "frontiercode": {
-          "score": 10.2,
-          "label": "Qwen3.7 Plus"
+          "score": 31.8,
+          "label": "GLM-5.3-Flash"
         },
         "benchlm_coding": {
-          "score": 40.9,
-          "label": "Qwen3.7 Plus"
+          "score": 45.5,
+          "label": "GLM-5.3-Flash"
         }
       }
     },
     {
-      "id": "qwen3.8-flash",
-      "name": "Qwen3.8 Flash",
-      "input_per_1m": 0.15,
-      "output_per_1m": 0.47,
-      "cached_per_1m": 0.016,
-      "monthly_limit_go": 30.0,
-      "monthly_limit_go_plus": 90.0,
-      "requests_per_5h": 5400,
-      "tokens_per_request": {
-        "input": 600,
-        "cached": 58000,
-        "output": 200,
-        "source": "Qwen3.8 Flash"
-      },
-      "cost_per_request_usd": 0.001112,
+      "id": "gpt-5.6-luna",
+      "name": "GPT-5.6 Luna",
+      "input_per_1m": 0.2,
+      "output_per_1m": 1.2,
+      "cached_per_1m": 0.02,
+      "monthly_limit_go": 15,
+      "monthly_limit_go_plus": 60,
+      "requests_per_5h": 2050,
+      "cost_per_request_usd": 0.001463,
       "aa_score": null,
       "aa_label": null,
       "scores": {
         "aa_index": {
+          "score": 23.8,
+          "label": "gpt-5.6-luna (AA index, aa gpt-5-6-luna)"
+        },
+        "aa": null,
+        "frontiercode": {
           "score": 39.8,
-          "label": "qwen3.8-flash (AA index)"
+          "label": "GPT-5.6 Luna"
+        },
+        "benchlm_coding": {
+          "score": 57.6,
+          "label": "GPT-5.6 Luna"
+        }
+      }
+    },
+    {
+      "id": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "input_per_1m": 0.1,
+      "output_per_1m": 0.5,
+      "cached_per_1m": 0.01,
+      "monthly_limit_go": 15,
+      "monthly_limit_go_plus": 60,
+      "requests_per_5h": 4230,
+      "cost_per_request_usd": 0.000709,
+      "aa_score": 25.9,
+      "aa_label": "Codex - GPT-6 Luna (Max)",
+      "scores": {
+        "aa_index": {
+          "score": 27.9,
+          "label": "gpt-6-luna (AA index, aa gpt-6-luna)"
+        },
+        "aa": {
+          "score": 25.9,
+          "label": "Codex - GPT-6 Luna (Max)"
+        },
+        "frontiercode": {
+          "score": 42.4,
+          "label": "GPT-6 Luna"
+        },
+        "benchlm_coding": {
+          "score": 51.8,
+          "label": "GPT-6 Luna"
+        }
+      }
+    },
+    {
+      "id": "claude-haiku-5-5",
+      "name": "Claude Haiku 5.5",
+      "input_per_1m": 0.1,
+      "output_per_1m": 0.5,
+      "cached_per_1m": 0.01,
+      "monthly_limit_go": 15,
+      "monthly_limit_go_plus": 60,
+      "requests_per_5h": 3850,
+      "cost_per_request_usd": 0.000779,
+      "aa_score": 29.6,
+      "aa_label": "Claude Code - Claude Haiku 5.5 (Max)",
+      "scores": {
+        "aa_index": {
+          "score": 36.5,
+          "label": "claude-haiku-5-5 (AA index, aa claude-haiku-5-5)"
+        },
+        "aa": {
+          "score": 29.6,
+          "label": "Claude Code - Claude Haiku 5.5 (Max)"
+        },
+        "frontiercode": {
+          "score": 46.4,
+          "label": "Claude Haiku 5.5"
+        },
+        "benchlm_coding": {
+          "score": 58.0,
+          "label": "Claude Haiku 5.5"
+        }
+      }
+    },
+    {
+      "id": "hy3",
+      "name": "Hy3",
+      "input_per_1m": 0.14,
+      "output_per_1m": 0.58,
+      "cached_per_1m": 0.035,
+      "monthly_limit_go": 60,
+      "monthly_limit_go_plus": 240,
+      "requests_per_5h": 4300,
+      "cost_per_request_usd": 0.002791,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": null,
+        "aa": null,
+        "frontiercode": null,
+        "benchlm_coding": {
+          "score": 46.3,
+          "label": "Hy3"
+        }
+      }
+    },
+    {
+      "id": "hy4-preview",
+      "name": "Hy4 preview",
+      "input_per_1m": 0.834,
+      "output_per_1m": 2.501,
+      "cached_per_1m": 0.042,
+      "monthly_limit_go": 30,
+      "monthly_limit_go_plus": 120,
+      "requests_per_5h": 1350,
+      "cost_per_request_usd": 0.004444,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": null,
+        "aa": null,
+        "frontiercode": null,
+        "benchlm_coding": {
+          "score": 54.5,
+          "label": "Hy4 preview"
+        }
+      }
+    },
+    {
+      "id": "kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "input_per_1m": 0.95,
+      "output_per_1m": 4,
+      "cached_per_1m": 0.19,
+      "monthly_limit_go": 60,
+      "monthly_limit_go_plus": 180,
+      "requests_per_5h": 994,
+      "cost_per_request_usd": 0.012072,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": null,
+        "aa": null,
+        "frontiercode": {
+          "score": 30.1,
+          "label": "Kimi K2.7"
+        },
+        "benchlm_coding": {
+          "score": 41.6,
+          "label": "Kimi K2.7 Code"
+        }
+      }
+    },
+    {
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "input_per_1m": 3,
+      "output_per_1m": 15,
+      "cached_per_1m": 0.3,
+      "monthly_limit_go": 15,
+      "monthly_limit_go_plus": 60,
+      "requests_per_5h": 98,
+      "cost_per_request_usd": 0.030612,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": null,
+        "aa": null,
+        "frontiercode": {
+          "score": 44.2,
+          "label": "Kimi K3"
+        },
+        "benchlm_coding": {
+          "score": 56.2,
+          "label": "Kimi K3"
+        }
+      }
+    },
+    {
+      "id": "mimo-v2.6-flash",
+      "name": "MiMo-V2.6-Flash",
+      "input_per_1m": 0.14,
+      "output_per_1m": 0.28,
+      "cached_per_1m": 0.0028,
+      "monthly_limit_go": 60,
+      "monthly_limit_go_plus": 120,
+      "requests_per_5h": 30100,
+      "cost_per_request_usd": 0.000399,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": {
+          "score": 26.7,
+          "label": "mimo-v2.6-flash (AA index, aa mimo-v2-6-flash)"
         },
         "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 52.1,
-          "label": "Qwen3.8-Flash-Next"
+          "score": 55.0,
+          "label": "MiMo-V2.6-Flash"
         }
       }
     },
     {
-      "id": "qwen3.8-max",
-      "name": "Qwen3.8 Max",
-      "input_per_1m": 2.0,
-      "output_per_1m": 6.0,
-      "cached_per_1m": 0.25,
-      "monthly_limit_go": 15.0,
-      "monthly_limit_go_plus": 60.0,
-      "requests_per_5h": 160,
-      "tokens_per_request": {
-        "input": 420,
-        "cached": 66000,
-        "output": 200,
-        "source": "Qwen3.8 Max"
-      },
-      "cost_per_request_usd": 0.01854,
-      "aa_score": 43.3,
-      "aa_label": "Claude Code - Qwen3.8 Max",
+      "id": "mimo-v2.6-pro",
+      "name": "MiMo-V2.6-Pro",
+      "input_per_1m": 0.435,
+      "output_per_1m": 0.87,
+      "cached_per_1m": 0.003625,
+      "monthly_limit_go": 15,
+      "monthly_limit_go_plus": 60,
+      "requests_per_5h": 3260,
+      "cost_per_request_usd": 0.00092,
+      "aa_score": null,
+      "aa_label": null,
       "scores": {
         "aa_index": {
-          "score": 45.4,
-          "label": "qwen3.8-max (AA index)"
+          "score": 29.9,
+          "label": "mimo-v2.6-pro (AA index, aa mimo-v2-6-pro)"
         },
-        "aa": {
-          "score": 43.3,
-          "label": "Claude Code - Qwen3.8 Max"
-        },
+        "aa": null,
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 52.8,
-          "label": "Qwen3.8 Max"
+          "score": 55.3,
+          "label": "MiMo-V2.6-Pro"
         }
       }
     },
     {
-      "id": "space-bunny",
-      "name": "Space Bunny",
+      "id": "minimax-m3",
+      "name": "MiniMax-M3",
+      "input_per_1m": 0.3,
+      "output_per_1m": 1.2,
+      "cached_per_1m": 0.06,
+      "monthly_limit_go": 60,
+      "monthly_limit_go_plus": 180,
+      "requests_per_5h": 3210,
+      "cost_per_request_usd": 0.003738,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": {
+          "score": 18.9,
+          "label": "minimax-m3 (AA index, aa minimax-m3)"
+        },
+        "aa": null,
+        "frontiercode": {
+          "score": 14.7,
+          "label": "MiniMax M3"
+        },
+        "benchlm_coding": {
+          "score": 37.8,
+          "label": "MiniMax M3"
+        }
+      }
+    },
+    {
+      "id": "minimax-m3.1-flash",
+      "name": "MiniMax M3.1 Flash",
       "input_per_1m": 0.15,
       "output_per_1m": 0.6,
-      "cached_per_1m": 0.03,
-      "monthly_limit_go": 30.0,
-      "monthly_limit_go_plus": 120.0,
-      "requests_per_5h": 3130,
-      "tokens_per_request": {
-        "input": 1000,
-        "cached": 55000,
-        "output": 200,
-        "source": "Space Bunny"
-      },
-      "cost_per_request_usd": 0.00192,
+      "cached_per_1m": 0.015,
+      "monthly_limit_go": 20,
+      "monthly_limit_go_plus": 80,
+      "requests_per_5h": 3880,
+      "cost_per_request_usd": 0.001031,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": {
+          "score": 29.1,
+          "label": "minimax-m3.1-flash (AA index, aa minimax-m3-1-flash)"
+        },
+        "aa": null,
+        "frontiercode": null,
+        "benchlm_coding": {
+          "score": 52.4,
+          "label": "MiniMax M3.1 Flash"
+        }
+      }
+    },
+    {
+      "id": "longcat-2.0",
+      "name": "LongCat-2.0",
+      "input_per_1m": 0.3,
+      "output_per_1m": 1.2,
+      "cached_per_1m": 0.006,
+      "monthly_limit_go": 60,
+      "monthly_limit_go_plus": 240,
+      "requests_per_5h": 11400,
+      "cost_per_request_usd": 0.001053,
       "aa_score": null,
       "aa_label": null,
       "scores": {
@@ -1715,29 +1346,285 @@
       }
     },
     {
-      "id": "step-5-preview-free",
-      "name": "Step 5 Preview Free",
-      "input_per_1m": 0.0,
-      "output_per_1m": 0.0,
-      "cached_per_1m": 0.0,
-      "monthly_limit_go": null,
-      "monthly_limit_go_plus": null,
-      "requests_per_5h": null,
-      "tokens_per_request": null,
-      "cost_per_request_usd": 0.0,
-      "aa_score": 51.2,
+      "id": "step-5-preview",
+      "name": "Step 5 Preview",
+      "input_per_1m": 1,
+      "output_per_1m": 2.7,
+      "cached_per_1m": 0.1,
+      "monthly_limit_go": 15,
+      "monthly_limit_go_plus": 60,
+      "requests_per_5h": 426,
+      "cost_per_request_usd": 0.007042,
+      "aa_score": 35.8,
       "aa_label": "Claude Code - Step 5 Preview",
       "scores": {
-        "aa_index": null,
+        "aa_index": {
+          "score": 28.5,
+          "label": "step-5-preview (AA index, aa step-5-preview)"
+        },
         "aa": {
-          "score": 51.2,
+          "score": 35.8,
           "label": "Claude Code - Step 5 Preview"
         },
         "frontiercode": null,
         "benchlm_coding": {
-          "score": 60.8,
+          "score": 48.6,
           "label": "Step 5 Preview"
         }
+      }
+    },
+    {
+      "id": "beam-free",
+      "name": "Beam Free",
+      "input_per_1m": 0,
+      "output_per_1m": 0,
+      "cached_per_1m": 0.0,
+      "monthly_limit_go": null,
+      "monthly_limit_go_plus": null,
+      "requests_per_5h": null,
+      "cost_per_request_usd": 0.0,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": null,
+        "aa": null,
+        "frontiercode": null,
+        "benchlm_coding": null
+      }
+    },
+    {
+      "id": "qwen3.8-max",
+      "name": "Qwen3.8 Max",
+      "input_per_1m": 2,
+      "output_per_1m": 6,
+      "cached_per_1m": 0.25,
+      "monthly_limit_go": 15,
+      "monthly_limit_go_plus": 60,
+      "requests_per_5h": 162,
+      "cost_per_request_usd": 0.018519,
+      "aa_score": 32.7,
+      "aa_label": "Claude Code - Qwen3.8 Max",
+      "scores": {
+        "aa_index": {
+          "score": 33.7,
+          "label": "qwen3.8-max (AA index, aa qwen3-8-max)"
+        },
+        "aa": {
+          "score": 32.7,
+          "label": "Claude Code - Qwen3.8 Max"
+        },
+        "frontiercode": null,
+        "benchlm_coding": {
+          "score": 50.7,
+          "label": "Qwen3.8 Max"
+        }
+      }
+    },
+    {
+      "id": "qwen3.8-flash",
+      "name": "Qwen3.8 Flash",
+      "input_per_1m": 0.15,
+      "output_per_1m": 0.47,
+      "cached_per_1m": 0.016,
+      "monthly_limit_go": 30,
+      "monthly_limit_go_plus": 90,
+      "requests_per_5h": 5400,
+      "cost_per_request_usd": 0.001111,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": {
+          "score": 28.6,
+          "label": "qwen3.8-flash (AA index, aa qwen3-8-flash-next)"
+        },
+        "aa": null,
+        "frontiercode": null,
+        "benchlm_coding": {
+          "score": 48.8,
+          "label": "Qwen3.8-Flash-Next"
+        }
+      }
+    },
+    {
+      "id": "qwen3.7-plus",
+      "name": "Qwen3.7 Plus",
+      "input_per_1m": 0.4,
+      "output_per_1m": 1.6,
+      "cached_per_1m": 0.04,
+      "monthly_limit_go": 60,
+      "monthly_limit_go_plus": 180,
+      "requests_per_5h": 4310,
+      "cost_per_request_usd": 0.002784,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": null,
+        "aa": null,
+        "frontiercode": {
+          "score": 10.2,
+          "label": "Qwen3.7 Plus"
+        },
+        "benchlm_coding": {
+          "score": 40.2,
+          "label": "Qwen3.7 Plus"
+        }
+      }
+    },
+    {
+      "id": "kimi-k3.1-pro",
+      "name": "Kimi K3.1 Pro",
+      "input_per_1m": 2,
+      "output_per_1m": 10,
+      "cached_per_1m": 0.2,
+      "monthly_limit_go": 15,
+      "monthly_limit_go_plus": 60,
+      "requests_per_5h": 147,
+      "cost_per_request_usd": 0.020408,
+      "aa_score": 48.6,
+      "aa_label": "Kimi Code CLI - Kimi K3.1 Pro",
+      "scores": {
+        "aa_index": {
+          "score": 46.5,
+          "label": "kimi-k3.1-pro (AA index, aa kimi-k3-1-pro)"
+        },
+        "aa": {
+          "score": 48.6,
+          "label": "Kimi Code CLI - Kimi K3.1 Pro"
+        },
+        "frontiercode": null,
+        "benchlm_coding": null
+      }
+    },
+    {
+      "id": "iceman-contributor-free",
+      "name": "Iceman Contributor Free",
+      "input_per_1m": 0,
+      "output_per_1m": 0,
+      "cached_per_1m": 0.0,
+      "monthly_limit_go": null,
+      "monthly_limit_go_plus": null,
+      "requests_per_5h": null,
+      "cost_per_request_usd": 0.0,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": null,
+        "aa": null,
+        "frontiercode": null,
+        "benchlm_coding": null
+      }
+    },
+    {
+      "id": "gemini-4-argon",
+      "name": "Gemini 4 Argon",
+      "input_per_1m": 2,
+      "output_per_1m": 10,
+      "cached_per_1m": 0.1,
+      "monthly_limit_go": 30,
+      "monthly_limit_go_plus": 120,
+      "requests_per_5h": 566,
+      "cost_per_request_usd": 0.010601,
+      "aa_score": 45.5,
+      "aa_label": "Antigravity CLI - Gemini 4 Argon (High)",
+      "scores": {
+        "aa_index": {
+          "score": 50.4,
+          "label": "gemini-4-argon (AA index, aa gemini-4-argon)"
+        },
+        "aa": {
+          "score": 45.5,
+          "label": "Antigravity CLI - Gemini 4 Argon (High)"
+        },
+        "frontiercode": {
+          "score": 47.5,
+          "label": "Gemini 4 Argon"
+        },
+        "benchlm_coding": {
+          "score": 72.1,
+          "label": "Gemini 4 Argon"
+        }
+      }
+    },
+    {
+      "id": "hy4",
+      "name": "Hy4",
+      "input_per_1m": 0.834,
+      "output_per_1m": 2.501,
+      "cached_per_1m": 0.042,
+      "monthly_limit_go": 60,
+      "monthly_limit_go_plus": 240,
+      "requests_per_5h": 2710,
+      "cost_per_request_usd": 0.004428,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": {
+          "score": 34.6,
+          "label": "hy4 (AA index, aa tencent-hy4)"
+        },
+        "aa": null,
+        "frontiercode": null,
+        "benchlm_coding": null
+      }
+    },
+    {
+      "id": "longcat-2.5-free",
+      "name": "LongCat 2.5 Free",
+      "input_per_1m": 0,
+      "output_per_1m": 0,
+      "cached_per_1m": 0.0,
+      "monthly_limit_go": null,
+      "monthly_limit_go_plus": null,
+      "requests_per_5h": null,
+      "cost_per_request_usd": 0.0,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": null,
+        "aa": null,
+        "frontiercode": null,
+        "benchlm_coding": null
+      }
+    },
+    {
+      "id": "hy4-flash-free",
+      "name": "Hy4 flash Free",
+      "input_per_1m": 0,
+      "output_per_1m": 0,
+      "cached_per_1m": 0.0,
+      "monthly_limit_go": null,
+      "monthly_limit_go_plus": null,
+      "requests_per_5h": null,
+      "cost_per_request_usd": 0.0,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": null,
+        "aa": null,
+        "frontiercode": null,
+        "benchlm_coding": null
+      }
+    },
+    {
+      "id": "qwen4-max",
+      "name": "Qwen4 Max",
+      "input_per_1m": 1.5,
+      "output_per_1m": 4.5,
+      "cached_per_1m": 0.075,
+      "monthly_limit_go": 15,
+      "monthly_limit_go_plus": 60,
+      "requests_per_5h": 463,
+      "cost_per_request_usd": 0.006479,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": {
+          "score": 42.9,
+          "label": "qwen4-max (AA index, aa qwen4-max)"
+        },
+        "aa": null,
+        "frontiercode": null,
+        "benchlm_coding": null
       }
     }
   ]

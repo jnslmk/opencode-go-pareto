@@ -1,32 +1,38 @@
 #!/usr/bin/env python3
-"""Refresh data/models.json from opencode Go docs + coding-benchmark scores.
+"""Refresh data/models.json from opencode Go model list + coding-benchmark scores.
 
 Sources:
-  - Model set, token prices, monthly limits, canonical IDs:
-    https://opencode.ai/docs/go/  (usage-limits + endpoints tables)
-  - Typical tokens per request (cost formula inputs): same page, token-mix list
+  - Model set, token prices, context limits, monthly allowance per plan:
+    https://opencode.ai/inference/go/v1/models  (OpenAI list shape, JSON)
+  - Est. requests / 5 hr and monthly limits per plan (what the Go console
+    shows): https://opencode.ai/console/go  ("Included models" table)
   - Score sources (machine-readable mirrors; canonical pages in SOURCES):
     - AA Coding Agent Index: https://benchlm.ai/md/benchmarks/aacodingagents.md
     - FrontierCode 1.1 Main: https://benchlm.ai/md/benchmarks/frontiercode.md
     - BenchLM Coding board:  https://benchlm.ai/md/coding.md
+    - AA Intelligence Index: per-model pages on artificialanalysis.ai
 
-Cost metric (x-axis): estimated USD credits per request =
-  input/1e6*input_price + cached/1e6*cached_price + output/1e6*output_price.
-Peak pricing for DeepSeek peak/off-peak rows, base tier for tiered models.
+Cost metric (x-axis): est. requests per 5 hours on the Go plan, straight from
+the console. Implied cost per request = 20% of the monthly Go allowance (the
+5-hour window) divided by those requests.
 
 Score matching is exact-only: normalized Go id <-> normalized leaderboard slug
-(dashes/dots stripped). Known renames live in SLUG_REMAP; anything else that
-does not match exactly is reported in meta.unmatched, never guessed.
+(dashes/dots stripped). Known renames live in SLUG_REMAP (BenchLM) and
+AA_SLUGS (AA pages); anything else that does not match exactly is reported in
+meta.unmatched, never guessed.
 
 Stdlib only. Fails loudly on unexpected page shapes (the Action surfaces it).
 """
 import json
 import re
 import sys
+import time
 import urllib.request
 from datetime import datetime, timezone
 
 GO_DOCS_URL = "https://opencode.ai/docs/go/"
+GO_MODELS_URL = "https://opencode.ai/inference/go/v1/models"
+GO_CONSOLE_URL = "https://opencode.ai/console/go"
 SOURCES = {
     "aa_index": {
         "label": "AA Intelligence Index",
@@ -50,21 +56,17 @@ SOURCES = {
     },
 }
 
-# AA model-page slug -> Go model id. AA slugs are usually the Go id with dots
-# as dashes ("qwen3-8-max" vs "qwen3.8-max"), covered by normalization; only
-# true renames go here.
+# Go model id -> AA model-page slug, for pages the id-derivative slug misses.
+# Default derivation is the id with dots as dashes ("qwen3.8-max" ->
+# "qwen3-8-max"). AA deprecates old slugs; a page whose record points at its
+# own dated successor ("deepseek-v4-1-flash" -> "-1017") is followed once.
+# Renames to a different version/family are listed here explicitly, never
+# followed automatically.
 AA_SLUGS = {
-    "deepseek-v4.1-flash": ["deepseek-v4-1-flash"],
-    "deepseek-v4-flash": ["deepseek-v4-flash"],
-    "deepseek-v4-flash-vision-exp": ["deepseek-v4-flash-vision"],
-    "deepseek-v4-pro": ["deepseek-v4-pro"],
-    "kimi-k2.6": ["kimi-k2-6"],
-    "mimo-v2.5": ["mimo-v2-5-0424"],  # base V2.5 page; -pro has its own
-    "muse-spark-1.2-contributor": ["muse-spark-1-2"],
-    "muse-spark-1.3-contributor": ["muse-spark-1-3"],
-    "hy3": ["hy3"],
-    "qwen3.8-max": ["qwen3-8-max"],
-    "qwen3.8-flash": ["qwen3-8-flash-next"],  # closest published sibling
+    "hy4": "tencent-hy4",
+    "muse-spark-1.2-contributor": "muse-spark-1-2",
+    "muse-spark-1.3-contributor": "muse-spark-1-3",
+    "qwen3.8-flash": "qwen3-8-flash-next",  # closest published sibling
 }
 
 UA = {"User-Agent": "opencode-go-pareto-updater/1.0 (+github pages demo)"}
@@ -75,27 +77,41 @@ SLUG_REMAP = {
     "deepseek-v4-1-flash": "deepseek-v4.1-flash",
     "kimi-2-6": "kimi-k2.6",
     "muse-spark-1-2": "muse-spark-1.2-contributor",
-    "muse-spark-1-1": "muse-spark-1.3-contributor",  # closest older sibling
     "hy3-preview": "hy3",
     "deepseek-v4-pro-0813": "deepseek-v4-pro",
     "deepseek-v4-flash-0731": "deepseek-v4-flash",
-    "kimi-k2-7-code": "kimi-k2.7-code",
 }
 
+
+def get(url, timeout=60):
+    req = urllib.request.Request(url, headers=UA)
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.read().decode("utf-8", "replace")
+
+
+def get_json(url):
+    return json.loads(get(url))
+
+
+def norm(s):
+    return re.sub(r"[^a-z0-9]+", "", s.lower())
+
+
 def parse_leaderboard(md, key):
-    """Parse one benchlm mirror into {go_id: (score, label)} + unmatched rows.
+    """Parse one benchlm mirror into {go_id: (score, label)}.
 
     AA rows link every row to the same canonical page (agent config in the
-    link text, e.g. "Opencode - GLM-5.3"), so match on the model part of the
-    text. FrontierCode/Coding rows link per-model (/models/<slug>), so match
-    on the exact slug. Both exact-only after normalization.
+    link text, e.g. "Codex - GPT-6 Luna (Max)" or "Opencode - GLM-5.3"), so
+    match on the model part of the text. FrontierCode/Coding rows link
+    per-model (/models/<slug>), so match on the exact slug. Both exact-only
+    after normalization.
     """
-    scores, unmatched = {}, []
+    scores = {}
     rows = re.findall(
         r"\|\s*\d+\s*\|\s*\[(.+?)\]\((.+?)\)\s*\|\s*(.+?)\s*\|\s*([\d.]+)%?\s*\|", md)
     if not rows:
         sys.exit(f"{key}: parsed zero leaderboard rows")
-    for label, link, rest, score in rows:
+    for label, link, _rest, score in rows:
         score = float(score)
         if link.startswith("/models/"):
             slug = link.split("/models/")[1].split("/")[0].split("#")[0]
@@ -107,39 +123,7 @@ def parse_leaderboard(md, key):
         if gid in scores and scores[gid][0] >= score:
             continue
         scores[gid] = (score, label)
-    return scores, unmatched
-
-
-def fetch_aa_index(go_ids):
-    """Scrape AA Intelligence Index per model page: {go_id: (score, label)}.
-
-    No bulk endpoint exists (only 24 chart-selected models inline on
-    /models), so fetch each mapped model page and read intelligenceIndex.
-    Unmapped Go ids (free/experimental models with no AA page) are skipped
-    and reported. Fails loudly on shape changes or mass misses.
-    """
-    import time
-    scores, missing = {}, []
-    for gid in sorted(go_ids):
-        slug = AA_SLUGS.get(gid, [gid])[0].replace(".", "-")
-        html = None
-        try:
-            html = get(f"https://artificialanalysis.ai/models/{slug}")
-        except Exception as e:  # noqa: BLE001 - reported, not hidden
-            missing.append({"label": gid, "score": None, "error": str(e)})
-        if html is None:
-            continue
-        m = re.search(r'intelligenceIndex\\?":([0-9.]+|null)', html)
-        me = re.search(r'intelligenceIndexIsEstimated\\?":(true|false)', html)
-        if not m or m.group(1) == "null":
-            missing.append({"label": gid, "score": None, "error": "no index"})
-            time.sleep(1)
-            continue
-        scores[gid] = (round(float(m.group(1)), 1),
-                       f"{gid} (AA index"
-                       f"{', estimated' if me and me.group(1) == 'true' else ''})")
-        time.sleep(1)
-    return scores, missing
+    return scores
 
 
 def match_scores(scores_list, go_ids):
@@ -170,14 +154,50 @@ def match_scores(scores_list, go_ids):
     return matched, unmatched
 
 
-def get(url):
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return r.read().decode("utf-8", "replace")
+def aa_record(html, slug):
+    """(intelligenceIndex, deprecatedTo) for one model record on an AA page."""
+    i = html.find(f'"slug":"{slug}"')
+    if i < 0:
+        return None, None
+    rec = html[i:i + 8000]
+    m = re.search(r'"intelligenceIndex":([0-9.]+|null)', rec)
+    d = re.search(r'"deprecatedTo":"([^"]+)"', rec)
+    return (float(m.group(1)) if m and m.group(1) != "null" else None,
+            d.group(1) if d else None)
 
 
-def norm(s):
-    return re.sub(r"[^a-z0-9]+", "", s.lower())
+def fetch_aa_index(go_ids):
+    """Scrape AA Intelligence Index per model page: {go_id: (score, label)}.
+
+    No bulk endpoint exists (only 24 chart-selected models inline on
+    /models), so fetch each mapped model page and read its own record's
+    intelligenceIndex. AA serves escaped JSON; unescape before matching.
+    Unmapped or index-less models are reported, never guessed.
+    """
+    scores, missing = {}, []
+    for gid in sorted(go_ids):
+        slug = AA_SLUGS.get(gid, gid.replace(".", "-"))
+        score = None
+        try:
+            html = get(f"https://artificialanalysis.ai/models/{slug}").replace("\\", "")
+            score, dep = aa_record(html, slug)
+            # Same-model dated snapshot only: "x" -> "x-1017". A successor
+            # version ("kimi-k3" -> "kimi-k3-1-pro") is NOT the same model.
+            if score is None and dep and re.fullmatch(rf"{re.escape(slug)}-\d+", dep):
+                slug = dep
+                html = get(f"https://artificialanalysis.ai/models/{slug}").replace("\\", "")
+                score, _ = aa_record(html, slug)
+        except Exception as e:  # noqa: BLE001 - reported, not hidden
+            missing.append({"label": gid, "score": None, "error": str(e)})
+            time.sleep(1)
+            continue
+        if score is None:
+            missing.append({"label": gid, "score": None,
+                            "error": f"no index (aa {slug})"})
+        else:
+            scores[gid] = (round(score, 1), f"{gid} (AA index, aa {slug})")
+        time.sleep(1)
+    return scores, missing
 
 
 def parse_tables(html):
@@ -189,189 +209,108 @@ def cells(row_html):
             for c in re.findall(r"<t[hd].*?>(.*?)</t[hd]>", row_html, re.S)]
 
 
-def parse_price(s):
-    s = s.strip()
-    if s in ("-", "Free", ""):
-        return 0.0
-    m = re.match(r"\$([\d.]+)", s)
-    if not m:
-        raise ValueError(f"unparseable price: {s!r}")
-    return float(m.group(1))
-
-
-def parse_limit(s):
-    s = s.replace("limited time", "").strip()
-    if s.lower().startswith("unlimited"):
+def money(s):
+    s = s.strip().replace(",", "")
+    if s.startswith("∞"):
         return None
-    m = re.match(r"\$([\d.]+)", s)
+    m = re.match(r"\$?([\d.]+)", s)
     if not m:
-        raise ValueError(f"unparseable monthly limit: {s!r}")
+        raise ValueError(f"unparseable money: {s!r}")
     return float(m.group(1))
 
 
-def is_pricing_table(t):
-    rows = re.findall(r"<tr.*?>(.*?)</tr>", t, re.S)
-    return bool(rows) and [c.lower() for c in cells(rows[0])][:5] == [
-        "model", "input", "output", "cached read", "cached write"]
+def count(s):
+    s = s.strip().replace(",", "")
+    if s.startswith("∞"):
+        return None
+    m = re.match(r"(\d+)", s)
+    if not m:
+        raise ValueError(f"unparseable count: {s!r}")
+    return int(m.group(1))
 
 
-def pick_row(rows, *wants):
-    """Pick pricing row: prefer Peak for DeepSeek, base (first) tier otherwise."""
-    if len(rows) == 1:
-        return rows[0]
+def parse_console(html):
+    """Console Go page "Included models" table -> {norm(name): row}.
+
+    Each row carries screen-reader copies of its cells, e.g.
+    "Go: 43,300; Go Plus: 86,700" and "Go: $100; Go Plus: $200"; read those.
+    """
+    tables = [t for t in parse_tables(html)
+              if "est. requests" in "|".join(cells(re.findall(
+                  r"<tr.*?>(.*?)</tr>", t, re.S)[0])).lower()]
+    if len(tables) != 1:
+        sys.exit(f"expected 1 console limits table, found {len(tables)}")
+    rows = [cells(r) for r in re.findall(r"<tr.*?>(.*?)</tr>", tables[0], re.S)][1:]
+    out = {}
     for r in rows:
-        if "peak" in r[0].lower() and "off-peak" not in r[0].lower():
-            return r
-    return rows[0]
+        if len(r) < 4 or not r[2]:
+            continue
+        req = re.search(r"Go: ([^;]+); Go Plus: ([^;]+)", r[2])
+        mon = re.search(r"Go: ([^;]+); Go Plus: ([^;]+)", r[3])
+        if not req or not mon:
+            sys.exit(f"console row shape changed: {r}")
+        out[norm(r[0])] = {
+            "requests_5h": count(req.group(1)),
+            "monthly_go": money(mon.group(1)),
+            "monthly_plus": money(mon.group(2)),
+        }
+    if len(out) < 20:
+        sys.exit(f"too few console model rows: {len(out)}")
+    return out
 
-
-def parse_int(s):
-    s = s.strip().lower()
-    if s.startswith("unlimited"):
-        return None
-    m = re.match(r"([\d,]+)", s)
-    if not m:
-        raise ValueError(f"unparseable request count: {s!r}")
-    return int(m.group(1).replace(",", ""))
-
-
-def is_requests_table(t):
-    rows = re.findall(r"<tr.*?>(.*?)</tr>", t, re.S)
-    return bool(rows) and [c.lower() for c in cells(rows[0])][:4] == [
-        "model", "requests per 5 hours", "requests per week",
-        "requests per month"]
 
 def main(out_path="data/models.json"):
-    html = get(GO_DOCS_URL)
+    api = get_json(GO_MODELS_URL)["data"]
+    console = parse_console(get(GO_CONSOLE_URL))
 
-    pricing = [t for t in parse_tables(html) if is_pricing_table(t)]
-    if len(pricing) != 2:
-        sys.exit(f"expected 2 pricing tables (Go + Go Plus), found {len(pricing)}")
-    plans = {}
-    for t in pricing:
-        rows = [cells(r) for r in re.findall(r"<tr.*?>(.*?)</tr>", t, re.S)][1:]
-        plans[rows[0][5].replace("limited time", "").strip()] = rows
-    # Identify Go ($10/mo) vs Go Plus by GLM-5.3-Flash monthly limit ($60 vs $180)
-    by_flash = {rows[0][5]: rows for rows in plans.values()}
-    go_rows = by_flash.get("$60")
-    plus_rows = by_flash.get("$180")
-    if go_rows is None or plus_rows is None:
-        sys.exit(f"could not identify Go/Go Plus tables: {sorted(by_flash)}")
+    # Map console rows (display names + badges) onto API ids: longest
+    # normalized API name that prefixes the normalized row text.
+    by_name = sorted(((norm(m["name"]), m["id"]) for m in api),
+                     key=lambda p: len(p[0]), reverse=True)
+    rows = {}
+    for key, row in console.items():
+        for n, gid in by_name:
+            if key.startswith(n):
+                rows[gid] = row
+                break
+    if len(rows) != len(api):
+        missing = sorted(m["id"] for m in api if m["id"] not in rows)
+        sys.exit(f"console rows unmatched for models: {missing}")
 
-    # Assert token prices identical across plans; index by normalized name
-    def index(rows):
-        d = {}
-        for r in rows:
-            d.setdefault(norm(re.sub(r"\s*\(.*", "", r[0])), []).append(r)
-        return d
-    go_idx, plus_idx = index(go_rows), index(plus_rows)
-    if set(go_idx) != set(plus_idx):
-        sys.exit("Go/Go Plus model sets differ")
-    for k in go_idx:
-        a, b = pick_row(go_idx[k]), pick_row(plus_idx[k])
-        if a[1:5] != b[1:5]:
-            sys.exit(f"price mismatch across plans for {a[0]}")
-
-    req_tables = [t for t in parse_tables(html) if is_requests_table(t)]
-    if len(req_tables) != 2:
-        sys.exit(f"expected 2 requests tables (Go + Go Plus), found {len(req_tables)}")
-    # Identify Go vs Go Plus by GLM-5.3-Flash requests/5h (6,320 vs 18,960)
-    req_by_flash = {}
-    for t in req_tables:
-        rows = [cells(r) for r in re.findall(r"<tr.*?>(.*?)</tr>", t, re.S)][1:]
-        req_by_flash[rows[0][1]] = rows
-    go_req = req_by_flash.get("6,320")
-    plus_req = req_by_flash.get("18,960")
-    if go_req is None or plus_req is None:
-        sys.exit(f"could not identify Go/Go Plus requests tables: {sorted(req_by_flash)}")
-    requests_5h = {}
-    for r in go_req:
-        requests_5h[norm(re.sub(r"\s*\(.*", "", r[0]))] = parse_int(r[1])
-
-    ep = [t for t in parse_tables(html) if "model id" in "|".join(
-        cells(re.findall(r"<tr.*?>(.*?)</tr>", t, re.S)[0])).lower()]
-    if not ep:
-        sys.exit("endpoints table not found")
-    ep_rows = [cells(r) for r in re.findall(r"<tr.*?>(.*?)</tr>", ep[0], re.S)][1:]
-    endpoints = {}
-    for r in ep_rows:
-        if len(r) >= 2:
-            endpoints[norm(re.sub(r"\s*\(.*", "", r[0]))] = (r[0], r[1])
-
-    # Token mix per request
-    i = html.find("token counts per request")
-    if i < 0:
-        sys.exit("token-mix list not found")
-    mix = {}
-    for li in re.findall(r"<li>(.*?)</li>", html[i:i + 8000], re.S):
-        t = re.sub(r"<[^>]+>", "", li).strip()
-        m = re.match(r"(.+?)\s*[—–-]\s*([\d,]+) input,\s*([\d,]+) cached?d?,\s*([\d,]+) output",
-                     t)
-        if m:
-            mix[m.group(1).strip()] = tuple(int(x.replace(",", "")) for x in m.groups()[1:])
-    if len(mix) < 20:
-        sys.exit(f"too few token-mix entries: {len(mix)}")
-
-    def expand(key):
-        # "GLM-5.3/5.2" -> ["GLM-5.3", "GLM-5.2"]; "Kimi K2.7/K2.6" likewise
-        parts = [p.strip() for p in re.split(r"/", key)]
-        out = [parts[0]]
-        for p in parts[1:]:
-            out.append(re.sub(r"[A-Za-z]?[\d.]+$", p, parts[0]))
-        return out
-
-    def find_mix(name):
-        n = norm(name)
-        for k, v in mix.items():
-            parts = [norm(p) for p in expand(k)]
-            if n in parts or any(
-                n.startswith(p) or p.startswith(n) or n.endswith(p) for p in parts
-            ):
-                return v, k
-        return None, None
-
-    # BenchLM-mirror score sources
-    raw = []
-    for key, src in SOURCES.items():
-        if key == "aa_index":
-            continue
-        raw.append((key, parse_leaderboard(get(src["url"]), key)[0]))
-    go_ids_pre = []
-    for key in sorted(go_idx):
-        priced = pick_row(go_idx[key])
-        name = re.sub(r"\s*\(.*", "", priced[0]).strip()
-        _, gid = endpoints.get(key, (name, None))
-        go_ids_pre.append(gid or norm(name).replace(" ", "-"))
-    matched, unmatched = match_scores(raw, go_ids_pre)
-    # AA Intelligence Index: per-model pages (no bulk endpoint)
-    aa_scores, aa_missing = fetch_aa_index(go_ids_pre)
+    go_ids = [m["id"] for m in api]
+    raw = [(key, parse_leaderboard(get(src["url"]), key))
+           for key, src in SOURCES.items() if key != "aa_index"]
+    matched, unmatched = match_scores(raw, go_ids)
+    aa_scores, aa_missing = fetch_aa_index(go_ids)
     matched["aa_index"], unmatched["aa_index"] = aa_scores, aa_missing
-    for key, src in SOURCES.items():
+    for key in SOURCES:
         if not matched[key]:
             sys.exit(f"{key}: zero scores matched to Go models")
 
     models = []
-    missing_mix = []
-    for key in sorted(go_idx):
-        priced = pick_row(go_idx[key])
-        plus = pick_row(plus_idx[key])
-        name = re.sub(r"\s*\(.*", "", priced[0]).strip()
-        ep_name, gid = endpoints.get(key, (name, None))
-        if gid is None:
-            # endpoints table lags pricing table; slugify display name
-            gid = norm(name).replace(" ", "-")
-        inp, outp, cached = (parse_price(priced[1]), parse_price(priced[2]),
-                             parse_price(priced[3]))
-        mix_v, mix_src = find_mix(name)
-        free = inp == 0 and outp == 0
-        if mix_v is None and not free:
-            missing_mix.append(name)
-            cost = None
-        elif free:
-            cost = 0.0
+    for m in api:
+        gid = m["id"]
+        row = rows[gid]
+        usage = m.get("go", {}).get("monthly_usage") or {}
+        monthly_go = usage.get("go")
+        monthly_plus = usage.get("go-plus")
+        # The console table is the published view; a drift means one of the
+        # two sources changed shape.
+        if monthly_go != row["monthly_go"] or monthly_plus != row["monthly_plus"]:
+            sys.exit(f"monthly limit mismatch for {gid}: api {monthly_go}/"
+                     f"{monthly_plus} vs console {row['monthly_go']}/"
+                     f"{row['monthly_plus']}")
+        text_cost = (m.get("cost") or {}).get("text") or {}
+        inp = (text_cost.get("input") or {}).get("price")
+        outp = (text_cost.get("output") or {}).get("price")
+        cached = ((text_cost.get("input") or {}).get("cache") or {}).get("read")
+        req5h = row["requests_5h"]
+        if monthly_go is None:
+            cost = 0.0 if inp == 0 and outp == 0 else None
+        elif req5h:
+            cost = round(0.2 * monthly_go / req5h, 6)
         else:
-            ti, tc, to = mix_v
-            cost = round(ti / 1e6 * inp + tc / 1e6 * cached + to / 1e6 * outp, 6)
+            cost = None
         scores = {}
         for skey in SOURCES:
             sc = matched[skey].get(gid)
@@ -379,23 +318,18 @@ def main(out_path="data/models.json"):
         aa = scores["aa"]
         models.append({
             "id": gid,
-            "name": ep_name if gid in [e[1] for e in endpoints.values()] else name,
+            "name": m["name"],
             "input_per_1m": inp,
             "output_per_1m": outp,
-            "cached_per_1m": cached,
-            "monthly_limit_go": parse_limit(priced[5]),
-            "monthly_limit_go_plus": parse_limit(plus[5]),
-            "requests_per_5h": requests_5h.get(key),
-            "tokens_per_request": ({"input": mix_v[0], "cached": mix_v[1],
-                                    "output": mix_v[2], "source": mix_src}
-                                   if mix_v else None),
+            "cached_per_1m": cached or 0.0,
+            "monthly_limit_go": monthly_go,
+            "monthly_limit_go_plus": monthly_plus,
+            "requests_per_5h": req5h,
             "cost_per_request_usd": cost,
             "aa_score": aa["score"] if aa else None,  # compat; prefer scores.*
             "aa_label": aa["label"] if aa else None,
             "scores": scores,
         })
-    if missing_mix:
-        sys.exit(f"no token mix for priced models: {missing_mix}")
     if len(models) < 20:
         sys.exit(f"too few Go models parsed: {len(models)}")
 
@@ -404,9 +338,10 @@ def main(out_path="data/models.json"):
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "go_docs": GO_DOCS_URL,
             "sources": {k: v for k, v in SOURCES.items()},
-            "method": ("cost_per_request_usd = input/1e6*input_per_1m + "
-                       "cached/1e6*cached_per_1m + output/1e6*output_per_1m; "
-                       "peak pricing for DeepSeek, base tier for tiered models"),
+            "method": ("requests_per_5h from the Go console limits table; "
+                       "cost_per_request_usd = 0.2 * monthly_limit_go / "
+                       "requests_per_5h; token prices are base Go prices "
+                       "(cost multipliers not applied)"),
             "unmatched": unmatched,
         },
         "models": models,

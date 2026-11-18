@@ -9,9 +9,11 @@ with Pareto frontier and a score-source switcher.
 
 - `index.html` — static page, renders `data/models.json`, no build step.
 - `data/models.json` — generated, never hand-edit. Refreshed daily by CI.
-- `scripts/update_models.py` — stdlib-only updater. Model set, prices, limits
-  and token mix come from https://opencode.ai/docs/go/; scores from AA model
-  pages (`aa_index`) plus benchlm mirrors (`aa`, `frontiercode`, `benchlm_coding`).
+- `scripts/update_models.py` — stdlib-only updater. Model set, token prices and
+  monthly allowances come from the Go model list API
+  (https://opencode.ai/inference/go/v1/models); est. requests/5h from the Go
+  console page (`/console/go`, "Included models"). Scores from AA model pages
+  (`aa_index`) plus benchlm mirrors (`aa`, `frontiercode`, `benchlm_coding`).
 - `.github/workflows/update-models.yml` — daily refresh, commits `data/`.
 - `.github/workflows/pages.yml` — deploys on push (path-filtered).
 

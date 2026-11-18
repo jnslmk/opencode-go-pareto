@@ -42,10 +42,12 @@ fetch("data/models.json").then(r => r.json()).then(d => {
     if (i === 0) render(k);
   });
   document.getElementById("foot").innerHTML =
-    `Costs: <a href="https://opencode.ai/docs/go/">opencode.ai/docs/go</a> (prices, limits, token mix). ` +
+    `Costs: <a href="https://opencode.ai/console/go#pricing">Go console</a> + ` +
+    `<a href="https://opencode.ai/inference/go/v1/models">Go model list API</a> ` +
+    `(prices, monthly limits, est. requests/5h). ` +
     Object.entries(d.meta.sources).map(([k, s]) =>
       `${s.label}: <a href="${s.url}">mirror</a> · <a href="${s.canonical}">canonical</a>`).join(" · ") +
-    `. Cost = input·in + cached·cache + output·out per typical request (peak pricing for DeepSeek, base tier otherwise). ` +
+    `. Cost/req = 20% of the monthly Go allowance (the 5-hour window) ÷ est. requests/5h. ` +
     `Updated daily by <a href="https://github.com/jnslmk/opencode-go-pareto">GitHub Action</a>.`;
 });
 function render(key) {

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-11-22T13:47:35.841296+00:00",
+    "generated_at": "2026-11-23T16:51:13.329712+00:00",
     "go_docs": "https://opencode.ai/docs/go/",
     "sources": {
       "aa_index": {
@@ -889,12 +889,7 @@
           "error": "no index (aa kimi-k3)"
         },
         {
-          "label": "longcat-2.0",
-          "score": null,
-          "error": "no index (aa longcat-2-0)"
-        },
-        {
-          "label": "longcat-2.5-free",
+          "label": "longcat-2.5",
           "score": null,
           "error": "HTTP Error 404: Not Found"
         },
@@ -977,9 +972,9 @@
       "input_per_1m": 1.4,
       "output_per_1m": 4.4,
       "cached_per_1m": 0.26,
-      "monthly_limit_go": 500,
-      "monthly_limit_go_plus": 1000,
-      "requests_per_5h": 6600,
+      "monthly_limit_go": 200,
+      "monthly_limit_go_plus": 400,
+      "requests_per_5h": 2640,
       "cost_per_request_usd": 0.015152,
       "aa_score": 40.1,
       "aa_label": "Opencode - GLM-5.3 (Max)",
@@ -1393,25 +1388,6 @@
       }
     },
     {
-      "id": "longcat-2.0",
-      "name": "LongCat-2.0",
-      "input_per_1m": 0.3,
-      "output_per_1m": 1.2,
-      "cached_per_1m": 0.006,
-      "monthly_limit_go": 60,
-      "monthly_limit_go_plus": 240,
-      "requests_per_5h": 11400,
-      "cost_per_request_usd": 0.001053,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": null,
-        "aa": null,
-        "frontiercode": null,
-        "benchlm_coding": null
-      }
-    },
-    {
       "id": "step-5-preview",
       "name": "Step 5 Preview",
       "input_per_1m": 1,
@@ -1634,25 +1610,6 @@
       }
     },
     {
-      "id": "longcat-2.5-free",
-      "name": "LongCat 2.5 Free",
-      "input_per_1m": 0,
-      "output_per_1m": 0,
-      "cached_per_1m": 0.0,
-      "monthly_limit_go": null,
-      "monthly_limit_go_plus": null,
-      "requests_per_5h": null,
-      "cost_per_request_usd": 0.0,
-      "aa_score": null,
-      "aa_label": null,
-      "scores": {
-        "aa_index": null,
-        "aa": null,
-        "frontiercode": null,
-        "benchlm_coding": null
-      }
-    },
-    {
       "id": "hy4-flash-free",
       "name": "Hy4 flash Free",
       "input_per_1m": 0,
@@ -1694,6 +1651,25 @@
           "score": 76.1,
           "label": "Qwen4 Max"
         }
+      }
+    },
+    {
+      "id": "longcat-2.5",
+      "name": "LongCat-2.5",
+      "input_per_1m": 0.3,
+      "output_per_1m": 1.2,
+      "cached_per_1m": 0.006,
+      "monthly_limit_go": 60,
+      "monthly_limit_go_plus": 240,
+      "requests_per_5h": 11400,
+      "cost_per_request_usd": 0.001053,
+      "aa_score": null,
+      "aa_label": null,
+      "scores": {
+        "aa_index": null,
+        "aa": null,
+        "frontiercode": null,
+        "benchlm_coding": null
       }
     }
   ]
